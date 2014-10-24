@@ -1,3 +1,7 @@
+# Folders to ignore
+.metadata/
+.settings/
+
 # Built application files
 *.apk
 *.ap_
