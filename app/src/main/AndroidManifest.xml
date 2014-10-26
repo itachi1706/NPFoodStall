@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ListStalls"
+            android:label="@string/title_activity_list_stalls" >
+        </activity>
+        <activity
+            android:name=".SelectCanteen"
+            android:label="@string/title_activity_select_canteen" >
+        </activity>
     </application>
 
 </manifest>

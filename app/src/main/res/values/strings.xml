@@ -4,5 +4,11 @@
     <string name="app_name">NgeeAnnFoodService</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="btn_main">RESERVE YOUR SHIT!</string>
+    <string name="title_activity_select_canteen">Select your Canteen</string>
+    <string name="lbl_select_Canteen">Select your Canteen</string>
+    <string name="title_activity_list_stalls">List Stalls - </string>
+    <string name="lvStallName">Stall Name</string>
+    <string name="lvStallCount">0</string>
 
 </resources>

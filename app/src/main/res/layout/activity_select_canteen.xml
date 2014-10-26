@@ -6,15 +6,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.itachi1706.ngeeannfoodservice.MainScreen" >
+    tools:context="com.itachi1706.ngeeannfoodservice.SelectCanteenActivity" >
 
-    <Button
-        android:id="@+id/btnReserve"
+    <TextView
+        android:id="@+id/tvInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="129dp"
-        android:text="@string/btn_main" />
+        android:text="@string/lbl_select_Canteen"
+        android:textSize="22sp" />
+
+    <ListView
+        android:id="@+id/lvSelectCanteen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvInfo" >
+
+    </ListView>
 
 </RelativeLayout>

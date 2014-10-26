@@ -6,15 +6,17 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.itachi1706.ngeeannfoodservice.MainScreen" >
+    tools:context="com.itachi1706.ngeeannfoodservice.ListStalls" >
 
-    <Button
-        android:id="@+id/btnReserve"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/lvStalls"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="129dp"
-        android:text="@string/btn_main" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+    </ListView>
 
 </RelativeLayout>
