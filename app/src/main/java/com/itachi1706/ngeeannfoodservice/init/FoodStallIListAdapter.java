@@ -52,7 +52,11 @@ public class FoodStallIListAdapter extends ArrayAdapter<FoodStall> {
                 stallName.setText(i.getName());
             }
             if (stallCount != null) {
-                stallCount.setText(i.getFoodItems().size() + "");
+                if (i.getFoodItems().size() <= 1) {
+                    stallCount.setText(i.getFoodItems().size() + " item");
+                } else {
+                    stallCount.setText(i.getFoodItems().size() + " items");
+                }
             }
         }
         return v;

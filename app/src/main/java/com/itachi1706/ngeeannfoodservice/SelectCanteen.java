@@ -3,6 +3,7 @@ package com.itachi1706.ngeeannfoodservice;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
-public class SelectCanteen extends Activity {
+public class SelectCanteen extends ActionBarActivity {
 
     ListView lvCanteen;
     String[] listOfCanteens = {"Makan Place", "Poolside", "Canteen 4", "Munch", "KFC", "Starbucks", "Coffee Bean"};
@@ -74,6 +75,7 @@ public class SelectCanteen extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Toast.makeText(getApplicationContext(), "LAUNCH SETTING ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

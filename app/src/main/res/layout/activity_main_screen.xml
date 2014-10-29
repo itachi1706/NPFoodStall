@@ -17,4 +17,21 @@
         android:layout_marginTop="129dp"
         android:text="@string/btn_main" />
 
+    <Button
+        android:id="@+id/btnCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_cart"
+        android:layout_below="@+id/btnReserve"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnReceipts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_receipt"
+        android:layout_below="@+id/btnCart"
+        android:layout_alignLeft="@+id/btnReserve"
+        android:layout_alignStart="@+id/btnReserve" />
+
 </RelativeLayout>

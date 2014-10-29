@@ -3,19 +3,25 @@ package com.itachi1706.ngeeannfoodservice;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.itachi1706.ngeeannfoodservice.init.FoodStallIListAdapter;
 
 import java.util.ArrayList;
 
 
-public class ListStalls extends Activity {
+public class ListStalls extends ActionBarActivity {
 
     ListView lvStalls;
+    String location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +45,8 @@ public class ListStalls extends Activity {
 
                 });
             } else {
-                String location = bundle.getString("location");
-                getActionBar().setTitle(getResources().getString(R.string.title_activity_list_stalls) + " " + location);
+                location = bundle.getString("location");
+                getSupportActionBar().setTitle(location + " " + getResources().getString(R.string.title_activity_list_stalls));
 
 
                 lvStalls = (ListView) findViewById(R.id.lvStalls);
@@ -49,6 +55,22 @@ public class ListStalls extends Activity {
 
                 FoodStallIListAdapter adapter = new FoodStallIListAdapter(this, R.layout.listview_food_stalls, stalls);
                 lvStalls.setAdapter(adapter);
+                lvStalls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        FoodStall stallSelected = (FoodStall) lvStalls.getItemAtPosition(position);
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(ListStalls.this);
+                        dialog.setTitle("Stall Selected").setMessage("Selected Stall: " + stallSelected.getName());
+                        dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        dialog.show();
+                        Toast.makeText(getApplicationContext(), "Selected Stall: " + stallSelected.getName(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         } else {
 
@@ -71,6 +93,14 @@ public class ListStalls extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Toast.makeText(getApplicationContext(), "LAUNCH SETTING ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.action_checkout){
+            Toast.makeText(getApplicationContext(), "LAUNCH CHECKOUT ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.action_viewmap){
+            //Toast.makeText(getApplicationContext(), "LAUNCH MAP ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ListStalls.this, ViewOnMaps.class).putExtra("location", location));
             return true;
         }
         return super.onOptionsItemSelected(item);
