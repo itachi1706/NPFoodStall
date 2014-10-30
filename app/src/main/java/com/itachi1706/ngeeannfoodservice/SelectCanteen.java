@@ -37,7 +37,7 @@ public class SelectCanteen extends ActionBarActivity {
                 // TODO Auto-generated method stub
                 String canteenSelected = (String) lvCanteen.getItemAtPosition(position);
 
-                Toast.makeText(getApplicationContext(), "Selected Canteen: " + canteenSelected, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Selected Canteen: " + canteenSelected, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SelectCanteen.this, ListStalls.class);
                 intent.putExtra("location", canteenSelected);
                 startActivity(intent);
@@ -75,7 +75,9 @@ public class SelectCanteen extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Toast.makeText(getApplicationContext(), "LAUNCH SETTING ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "LAUNCH SETTING ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SelectCanteen.this, AppSettings.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -2,6 +2,7 @@ package com.itachi1706.ngeeannfoodservice;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.LauncherActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,59 +14,51 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.itachi1706.ngeeannfoodservice.init.FoodStallIListAdapter;
+import com.itachi1706.ngeeannfoodservice.init.FoodItemListAdapter;
 
 import java.util.ArrayList;
 
 
-public class ListStalls extends ActionBarActivity {
+public class ListItemInStall extends ActionBarActivity {
 
-    ListView lvStalls;
-    String location;
+    ListView lvItems;
+    FoodStall stall;
+    ArrayList<FoodItem> foodItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_stalls);
+        setContentView(R.layout.activity_list_item_in_stall);
 
-        //Get the location from the selectCanteen class
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
-            if (bundle.getString("location").isEmpty()){
+        if (bundle != null) {
+            if (bundle.getInt("foodStall", -1) == -1) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Error!");
-                builder.setMessage("Unable to get location");
-                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+                builder.setMessage("Unable to get Food Stall Info");
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
-                        ListStalls.this.finish();
+                        ListItemInStall.this.finish();
                     }
 
                 });
             } else {
-                location = bundle.getString("location");
-                getSupportActionBar().setTitle(location + " " + getResources().getString(R.string.title_activity_list_stalls));
-
-
-                lvStalls = (ListView) findViewById(R.id.lvStalls);
-                DatabaseHandler db = new DatabaseHandler(this.getApplicationContext());
-                ArrayList<FoodStall> stalls = db.getAllFoodStallsFromLocation(location);
-
-                FoodStallIListAdapter adapter = new FoodStallIListAdapter(this, R.layout.listview_food_stalls, stalls);
-                lvStalls.setAdapter(adapter);
-                lvStalls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                DatabaseHandler db = new DatabaseHandler(this);
+                stall = db.getFoodStall(bundle.getInt("foodStall"));
+                foodItems = stall.getFoodItems();
+                lvItems = (ListView) findViewById(R.id.lvItems);
+                FoodItemListAdapter adapter = new FoodItemListAdapter(this, R.layout.listview_food_items, foodItems);
+                lvItems.setAdapter(adapter);
+                lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        FoodStall stallSelected = (FoodStall) lvStalls.getItemAtPosition(position);
-                        Intent intent = new Intent(ListStalls.this, ListItemInStall.class);
-                        intent.putExtra("foodStall", stallSelected.getID());
-                        startActivity(intent);
-
-                        /*
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(ListStalls.this);
-                        dialog.setTitle("Stall Selected").setMessage("Selected Stall: " + stallSelected.getName());
+                        FoodItem itemSelected = (FoodItem) lvItems.getItemAtPosition(position);
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(ListItemInStall.this);
+                        dialog.setTitle("Item Selected").setMessage("Selected Item: " + itemSelected.getName() + "\nPrice: " +
+                        itemSelected.getPrice());
                         dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -73,22 +66,19 @@ public class ListStalls extends ActionBarActivity {
                             }
                         });
                         dialog.show();
-                        Toast.makeText(getApplicationContext(), "Selected Stall: " + stallSelected.getName(), Toast.LENGTH_SHORT).show();
-                        */
+                        Toast.makeText(getApplicationContext(), "LAUNCH ALERTDIALOG(ITEMQUANTITY) [UNIMPLEMENTED]", Toast.LENGTH_SHORT).show();
                     }
                 });
+
             }
-        } else {
-
         }
-
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.list_stalls, menu);
+        getMenuInflater().inflate(R.menu.menu_list_item_in_stall, menu);
         return true;
     }
 
@@ -98,9 +88,10 @@ public class ListStalls extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            //Toast.makeText(getApplicationContext(), "LAUNCH SETTING ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ListStalls.this, AppSettings.class);
+            Intent intent = new Intent(ListItemInStall.this, AppSettings.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.action_checkout){
@@ -108,9 +99,10 @@ public class ListStalls extends ActionBarActivity {
             return true;
         } else if (id == R.id.action_viewmap){
             //Toast.makeText(getApplicationContext(), "LAUNCH MAP ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(ListStalls.this, ViewOnMaps.class).putExtra("location", location));
+            startActivity(new Intent(ListItemInStall.this, ViewOnMaps.class).putExtra("location", stall.getLocation()));
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

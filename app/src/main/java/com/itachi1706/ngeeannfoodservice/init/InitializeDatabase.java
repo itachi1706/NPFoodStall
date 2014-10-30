@@ -32,7 +32,7 @@ public class InitializeDatabase extends AsyncTask<Void,Void,Boolean> {
     @Override
     protected Boolean doInBackground(Void... params) {
         //Init Database
-        DatabaseHandler db = new DatabaseHandler(mContext);
+        DatabaseHandler db = new DatabaseHandler(mContext.getApplicationContext());
         publishProgress();
         db.dropTablesAndRecreate();
         dropped = true;

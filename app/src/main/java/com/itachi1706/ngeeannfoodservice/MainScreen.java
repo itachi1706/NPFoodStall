@@ -1,9 +1,14 @@
 package com.itachi1706.ngeeannfoodservice;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +29,7 @@ public class MainScreen extends ActionBarActivity {
 
     Button btnReserve, btnCart, btnReserved;
     ProgressDialog pDialog;
+    static final int DB_VER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +68,59 @@ public class MainScreen extends ActionBarActivity {
             }
 
         });
-
-        DatabaseHandler db = new DatabaseHandler(this);
-            pDialog = new ProgressDialog(this);
-            pDialog.setCancelable(false);
-            pDialog.setIndeterminate(true);
-            pDialog.setTitle("Refreshing Database...");
-            pDialog.setMessage("Updating Database of food stalls...");
-            pDialog.show();
-
-        new InitializeDatabase(pDialog, this).execute();
+        initDatabase();
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();    //Call superclass method first
+        try {
+            if (pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+        }  catch (NullPointerException e){
+
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();   //Call superclass method first
+
+        initDatabase();
+    }
+
+    public void initDatabase(){
+        //Toast.makeText(getApplicationContext(), Build.PRODUCT.toString(), Toast.LENGTH_SHORT).show();
+        if (DatabaseHandler.checkIfSDK()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Error with SDK :(")
+                    .setMessage("There will be an error if you use an SDK to access emulator this app\n"
+                                    + "Please use an actual Android device to test this application.")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MainScreen.this.finish();
+                        }
+                    });
+            builder.show();
+        } else {
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+            if (sharedPref.getInt("dbValue", 0) != DB_VER) {
+                DatabaseHandler db = new DatabaseHandler(this.getApplicationContext());
+                pDialog = new ProgressDialog(this);
+                pDialog.setCancelable(false);
+                pDialog.setIndeterminate(true);
+                pDialog.setTitle("Refreshing Database...");
+                pDialog.setMessage("Updating Database of food stalls...");
+                pDialog.show();
+
+                new InitializeDatabase(pDialog, this).execute();
+                sharedPref.edit().putInt("dbValue", DB_VER).apply();
+            }
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -89,7 +136,9 @@ public class MainScreen extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Toast.makeText(getApplicationContext(), "LAUNCH SETTING ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "LAUNCH SETTING ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainScreen.this, AppSettings.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
