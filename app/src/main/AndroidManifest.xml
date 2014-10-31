@@ -59,6 +59,10 @@
             android:name="com.itachi1706.ngeeannfoodservice.AppSettings"
             android:label="@string/title_activity_app_settings" >
         </activity>
+        <activity
+            android:name="com.itachi1706.ngeeannfoodservice.DebugSettings"
+            android:label="@string/title_activity_app_settings" >
+        </activity>
     </application>
 
 </manifest>
