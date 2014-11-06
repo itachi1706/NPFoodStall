@@ -14,7 +14,8 @@
         android:textSize="20sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/primary_dark_material_light" />
 
     <TextView
         android:id="@+id/tvStallCount"
@@ -25,7 +26,8 @@
         android:layout_below="@+id/tvStallName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textColor="@color/primary_text_default_material_light" />
 
     <ImageView
         android:layout_width="wrap_content"

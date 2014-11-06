@@ -13,6 +13,8 @@
     <string name="lbl_select_Canteen">Select your Canteen</string>
     <string name="title_activity_list_stalls"> - List Stalls</string>
     <string name="lvStallName">Stall Name</string>
+    <string name="lvStallItemName">Stall Item Name</string>
+    <string name="lvStallItemPrice">$0.00</string>
     <string name="lvStallCount">0</string>
     <string name="title_activity_view_on_maps">View On Map</string>
     <string name="map_key">AIzaSyDnIAjDITteFIvqTrf0amORlWWe3JkAhX8</string>

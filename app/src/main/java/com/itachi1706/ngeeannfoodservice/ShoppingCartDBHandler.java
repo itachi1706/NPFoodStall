@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.itachi1706.ngeeannfoodservice.cart.CartItem;
+
 import java.io.File;
 
 /**
@@ -83,5 +85,41 @@ public class ShoppingCartDBHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         return identity;
+    }
+
+    /**
+     * Check if there is a cart that has not been confirmed yet
+     */
+    public boolean checkIfCartAlreadyExist(){
+        return false;
+    }
+
+    /**
+     * Add a cart item into cart
+     */
+    public void addItemToCart(CartItem item){
+
+
+    }
+
+    /**
+     * Remove a cart item from the cart
+     */
+    public void removeItemFromCart(CartItem item){
+
+    }
+
+    /**
+     * Check if cart item exists already
+     */
+    public boolean checkIfCartItemExist(CartItem item){
+        return false;
+    }
+
+    /**
+     * Modify a cart item
+     */
+    public void modifyCartItem(CartItem newitem){
+
     }
 }
