@@ -1,7 +1,7 @@
 # Folders to ignore
 .metadata/
 .settings/
-.idea/
+.idea/*
 
 # Built application files
 *.apk
