@@ -45,7 +45,7 @@ public class FoodItemListAdapter extends ArrayAdapter<FoodItem> {
                 itemName.setText(i.getName());
             }
             if (itemPrice != null){
-                itemPrice.setText("$" + i.getPrice());
+                itemPrice.setText("$" + String.format("%.2f", i.getPrice()));
             }
         }
         return v;
