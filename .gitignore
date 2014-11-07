@@ -1,6 +1,8 @@
 # Folders to ignore
 .metadata/
 .settings/
+.idea/
+idea/
 .idea/*
 
 # Built application files
