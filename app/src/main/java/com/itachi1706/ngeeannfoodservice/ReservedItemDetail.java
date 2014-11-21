@@ -48,7 +48,7 @@ public class ReservedItemDetail extends ActionBarActivity {
                 });
             } else {
 
-                this.getSupportActionBar().setTitle(this.getResources().getString(R.string.title_activity_reserved_item_detail + cartIdFromBundle));
+                this.getSupportActionBar().setTitle(this.getResources().getString(R.string.title_activity_reserved_item_detail) + cartIdFromBundle);
                 ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
                 ArrayList<Cart> carts = db.getReservedItems();
                 Cart cart = null;
