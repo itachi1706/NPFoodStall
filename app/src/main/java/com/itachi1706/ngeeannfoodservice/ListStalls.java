@@ -46,7 +46,7 @@ public class ListStalls extends ActionBarActivity {
                 });
             } else {
                 location = bundle.getString("location");
-                getSupportActionBar().setTitle(location + " " + getResources().getString(R.string.title_activity_list_stalls));
+                getSupportActionBar().setTitle(location);
 
 
                 lvStalls = (ListView) findViewById(R.id.lvStalls);

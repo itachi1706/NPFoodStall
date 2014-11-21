@@ -41,7 +41,7 @@ public class MainReservedItemListAdapter extends ArrayAdapter<Cart> {
             TextView itemTime = (TextView) v.findViewById(R.id.tvCartTime);
 
             if (itemName != null){
-                itemName.setText("Reserved Items #" + i.get_cartId());
+                itemName.setText("Reserved Item List #" + i.get_cartId());
             }
             if (itemTime != null){
                 itemTime.setText(i.get_datetime());

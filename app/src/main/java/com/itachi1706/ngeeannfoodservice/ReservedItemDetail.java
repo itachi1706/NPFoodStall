@@ -2,6 +2,7 @@ package com.itachi1706.ngeeannfoodservice;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -47,6 +48,7 @@ public class ReservedItemDetail extends ActionBarActivity {
                 });
             } else {
 
+                this.getSupportActionBar().setTitle(this.getResources().getString(R.string.title_activity_reserved_item_detail + cartIdFromBundle));
                 ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
                 ArrayList<Cart> carts = db.getReservedItems();
                 Cart cart = null;
@@ -132,6 +134,7 @@ public class ReservedItemDetail extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(ReservedItemDetail.this, AppSettings.class));
             return true;
         }
 

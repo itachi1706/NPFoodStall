@@ -54,6 +54,7 @@ public class ListItemInStall extends ActionBarActivity {
             } else {
                 DatabaseHandler db = new DatabaseHandler(this);
                 stall = db.getFoodStall(bundle.getInt("foodStall"));
+                this.getSupportActionBar().setTitle(stall.getName() + " - " + stall.getLocation());
                 foodItems = stall.getFoodItems();
                 lvItems = (ListView) findViewById(R.id.lvItems);
                 FoodItemListAdapter adapter = new FoodItemListAdapter(this, R.layout.listview_food_items, foodItems);
