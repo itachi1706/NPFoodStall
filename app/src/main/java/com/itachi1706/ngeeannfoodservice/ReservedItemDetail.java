@@ -78,17 +78,23 @@ public class ReservedItemDetail extends ActionBarActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             final CartItem item = (CartItem) items.getItemAtPosition(position);
-                            new AlertDialog.Builder(ReservedItemDetail.this).setTitle(item.get_name()).setMessage("Have you collected this item from the stall?")
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
-                                            db.itemArrived(item);
-                                            adapter.notifyDataSetChanged();
-                                            items.setAdapter(adapter);
-                                            Toast.makeText(getApplicationContext(), "Recieved " + item.get_name() + " from " + item.get_location(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    }).setNegativeButton("No", null).show();
+                            if (!item.is_status()) {
+                                new AlertDialog.Builder(ReservedItemDetail.this).setTitle(item.get_name()).setMessage("Have you collected this item from the stall?\nWARNING: Clicking Yes is irreversible!")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
+                                                db.itemArrived(item);
+                                                adapter.notifyDataSetChanged();
+                                                items.setAdapter(adapter);
+                                                ReservedItemDetail.this.recreate();
+                                                Toast.makeText(getApplicationContext(), "Recieved " + item.get_name() + " from " + item.get_location(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }).setNegativeButton("No", null).show();
+                            } else {
+                                new AlertDialog.Builder(ReservedItemDetail.this).setTitle("Error").setMessage("You have already collected this item!")
+                                        .setPositiveButton(android.R.string.ok, null).show();
+                            }
                         }
                     });
 
