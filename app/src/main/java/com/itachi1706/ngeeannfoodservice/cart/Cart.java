@@ -27,17 +27,19 @@ public class Cart {
 
     public Cart(Context c){
         ShoppingCartDBHandler cart = new ShoppingCartDBHandler(c);
-        this._datetime = getDateTime();
+        this._datetime = new Date().toString();
         this._confirmed = false;
         this._cartId = cart.createCartRecordWithId(_datetime);
+        this._cartItems = new ArrayList<CartItem>();
     }
 
+    /*
     private String getDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date date = new Date();
         return dateFormat.format(date);
-    }
+    }*/
 
     public int get_cartId() {
         return _cartId;

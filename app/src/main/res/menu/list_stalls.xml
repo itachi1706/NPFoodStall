@@ -10,10 +10,10 @@
         android:title="@string/action_checkout"
         android:icon="@drawable/ic_checkout"
         android:orderInCategory="100"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/action_viewmap"
         android:title="@string/action_viewmap"
         android:icon="@android:drawable/ic_menu_mapmode"
         android:orderInCategory="100"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

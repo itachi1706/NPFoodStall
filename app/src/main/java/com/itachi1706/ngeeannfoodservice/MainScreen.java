@@ -53,7 +53,8 @@ public class MainScreen extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getApplicationContext(), "LAUNCH CART ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "LAUNCH CART ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainScreen.this, CartActivity.class));
             }
 
         });
@@ -64,7 +65,8 @@ public class MainScreen extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getApplicationContext(), "LAUNCH RESERVE ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "LAUNCH RESERVE ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainScreen.this, ReservedItems.class));
             }
 
         });

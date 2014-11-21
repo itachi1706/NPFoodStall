@@ -104,7 +104,7 @@ public class ListStalls extends ActionBarActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.action_checkout){
-            Toast.makeText(getApplicationContext(), "LAUNCH CHECKOUT ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ListStalls.this, CartActivity.class));
             return true;
         } else if (id == R.id.action_viewmap){
             //Toast.makeText(getApplicationContext(), "LAUNCH MAP ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();

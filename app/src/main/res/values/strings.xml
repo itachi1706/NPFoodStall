@@ -20,5 +20,8 @@
     <string name="map_key">AIzaSyDnIAjDITteFIvqTrf0amORlWWe3JkAhX8</string>
     <string name="title_activity_list_item_in_stall">ListItemInStall</string>
     <string name="title_activity_cart">CartActivity</string>
+    <string name="action_checkout_cart">CHECKOUT</string>
+    <string name="title_activity_reserved_items">ReservedItems</string>
+    <string name="title_activity_reserved_item_detail">ReservedItemDetail</string>
 
 </resources>

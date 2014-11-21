@@ -67,6 +67,14 @@
             android:name="com.itachi1706.ngeeannfoodservice.CartActivity"
             android:label="@string/title_activity_cart" >
         </activity>
+        <activity
+            android:name="com.itachi1706.ngeeannfoodservice.ReservedItems"
+            android:label="@string/title_activity_reserved_items" >
+        </activity>
+        <activity
+            android:name="com.itachi1706.ngeeannfoodservice.ReservedItemDetail"
+            android:label="@string/title_activity_reserved_item_detail" >
+        </activity>
     </application>
 
 </manifest>

@@ -22,6 +22,7 @@ import com.itachi1706.ngeeannfoodservice.cart.CartItem;
 import com.itachi1706.ngeeannfoodservice.init.FoodItemListAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ListItemInStall extends ActionBarActivity {
@@ -72,27 +73,39 @@ public class ListItemInStall extends ActionBarActivity {
                         dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                int qty = Integer.parseInt(input.getText().toString());
-                                ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
-                                Cart cart;
-                                if (db.checkIfCartAlreadyExist()){
-                                    cart = db.getCartAndItem().get(0);
-                                }
-                                else {
-                                    cart = new Cart(getApplicationContext());
-                                }
-                                CartItem ci = new CartItem(cart.get_cartId(), itemSelected.getName(), stall.getLocation() ,itemSelected.getPrice(), qty);
-                                ArrayList<CartItem> carts = cart.get_cartItems();
-                                carts.add(ci);
-                                cart.set_cartItems(carts);
-                                db.addItemToCart(ci);
-                                new AlertDialog.Builder(getApplicationContext()).setTitle("Item Added").setMessage("Reserved " + qty + " " + itemSelected.getName())
-                                        .setPositiveButton(android.R.string.ok, null).setNegativeButton("Go to Cart", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Toast.makeText(getApplicationContext(), "CART ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+                                if (input.getText().length() == 0){
+                                    Toast.makeText(getApplicationContext(), "Quantity must be filled before confirming", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    int qty = Integer.parseInt(input.getText().toString());
+                                    ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
+                                    Cart cart;
+                                    if (db.checkIfCartAlreadyExist()) {
+                                        cart = db.getCartAndItem().get(0);
+                                    } else {
+                                        cart = new Cart(getApplicationContext());
                                     }
-                                }).show();
+                                    CartItem ci = new CartItem(cart.get_cartId(), itemSelected.getName(), stall.getLocation() + " - " + stall.getName(), itemSelected.getPrice(), qty);
+                                    ArrayList<CartItem> carts = cart.get_cartItems();
+                                    carts.add(ci);
+                                    cart.set_cartItems(carts);
+                                    if (db.addItemToCart(ci)) {
+                                        new AlertDialog.Builder(ListItemInStall.this).setTitle("Item Added").setMessage("Reserved " + qty + " " + itemSelected.getName())
+                                                .setPositiveButton(android.R.string.ok, null).setNegativeButton("Go to Cart", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                startActivity(new Intent(ListItemInStall.this, CartActivity.class));
+                                            }
+                                        }).show();
+                                    } else {
+                                        new AlertDialog.Builder(ListItemInStall.this).setTitle("Error").setMessage("Item Already Exists in the cart!")
+                                                .setPositiveButton(android.R.string.ok, null).setNegativeButton("Go to Cart", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                startActivity(new Intent(ListItemInStall.this, CartActivity.class));
+                                            }
+                                        }).show();
+                                    }
+                                }
                             }
                         });
                         dialog.show();
@@ -123,7 +136,7 @@ public class ListItemInStall extends ActionBarActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.action_checkout){
-            Toast.makeText(getApplicationContext(), "LAUNCH CHECKOUT ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ListItemInStall.this, CartActivity.class));
             return true;
         } else if (id == R.id.action_viewmap){
             //Toast.makeText(getApplicationContext(), "LAUNCH MAP ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
