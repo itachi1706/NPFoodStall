@@ -108,7 +108,7 @@ public class ListItemInStall extends ActionBarActivity {
                                     }
                                 }
                             }
-                        });
+                        }).setNegativeButton("Cancel", null);
                         dialog.show();
                     }
                 });

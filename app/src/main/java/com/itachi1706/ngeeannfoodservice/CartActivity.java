@@ -61,7 +61,7 @@ public class CartActivity extends ActionBarActivity {
                     String itemName = item.get_name();
                     new AlertDialog.Builder(CartActivity.this).setTitle("Item Details")
                             .setMessage("Location: " + item.get_location() + "\nQuantity: " + item.get_qty() + "\nPrice: " + item.get_price())
-                            .setPositiveButton(android.R.string.ok,null).setNeutralButton("Change Quantity",new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Close",null).setNeutralButton("Change Quantity",new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             final EditText input = new EditText(getApplicationContext());
