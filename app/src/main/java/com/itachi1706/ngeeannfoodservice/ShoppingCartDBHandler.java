@@ -1,10 +1,12 @@
 package com.itachi1706.ngeeannfoodservice;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.itachi1706.ngeeannfoodservice.cart.Cart;
 import com.itachi1706.ngeeannfoodservice.cart.CartItem;
 
 import java.io.File;
@@ -48,7 +50,7 @@ public class ShoppingCartDBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         String CREATE_CART_TABLE = "CREATE TABLE " + TABLE_CART + "(" + KEY_CART_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_CART_DATETIME +
                 " TIMESTAMP DEFAULT CURRENT_TIMESTAMP," + KEY_CART_CHECK + " INTEGER);";
-        String CREATE_CART_ITEM_TABLE = "CREATE TABLE " + TABLE_CART_ITEM + "(" + KEY_CART_ITEM_ID + " INTEGER,"
+        String CREATE_CART_ITEM_TABLE = "CREATE TABLE " + TABLE_CART_ITEM + "(" + KEY_CART_ITEM_ID + " INTEGER AUTOINCREMENT,"
                 + KEY_CART_ITEM_CART_ID + " INTEGER," + KEY_CART_ITEM_NAME + " TEXT," + KEY_CART_ITEM_PRICE + " DOUBLE," +
                 KEY_CART_ITEM_LOCATION + " TEXT," + KEY_CART_ITEM_QTY + " INTEGER," +
                 "FOREIGN KEY (" + KEY_CART_ITEM_CART_ID + ") REFERENCES " + TABLE_CART + " (" + KEY_CART_ID + "), PRIMARY KEY (" + KEY_CART_ITEM_ID + ", " + KEY_CART_ITEM_CART_ID + "));";
@@ -91,6 +93,15 @@ public class ShoppingCartDBHandler extends SQLiteOpenHelper {
      * Check if there is a cart that has not been confirmed yet
      */
     public boolean checkIfCartAlreadyExist(){
+        String query = "SELECT * FROM " + TABLE_CART + " WHERE " + KEY_CART_CHECK + " = 0;";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.close();
+        db.close();
+
+        if (cursor.getCount() != 0){
+            return true;
+        }
         return false;
     }
 
@@ -98,28 +109,54 @@ public class ShoppingCartDBHandler extends SQLiteOpenHelper {
      * Add a cart item into cart
      */
     public void addItemToCart(CartItem item){
+        SQLiteDatabase db = this.getWritableDatabase();
 
-
+        ContentValues values = new ContentValues();
+        values.put(KEY_CART_ITEM_CART_ID, item.getCartID());
+        values.put(KEY_CART_ITEM_LOCATION, item.get_location());
+        values.put(KEY_CART_ITEM_NAME, item.get_name());
+        values.put(KEY_CART_ITEM_QTY, item.get_qty());
+        values.put(KEY_CART_ITEM_PRICE, item.get_price());
+        db.insert(TABLE_CART_ITEM, null, values);
+        db.close();
     }
 
     /**
      * Remove a cart item from the cart
      */
     public void removeItemFromCart(CartItem item){
-
+        String query = "DELETE FROM " + TABLE_CART_ITEM + " WHERE " + KEY_CART_ITEM_CART_ID + " = " + item.getCartID() +
+                " AND " + KEY_CART_ITEM_NAME + " = '" + item.get_name() + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(query);
+        db.close();
     }
 
     /**
      * Check if cart item exists already
      */
     public boolean checkIfCartItemExist(CartItem item){
+        String query = "DELETE FROM " + TABLE_CART_ITEM + " WHERE " + KEY_CART_ITEM_CART_ID + " = " + item.getCartID() +
+                " AND " + KEY_CART_ITEM_NAME + " = '" + item.get_name() + "';";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.close();
+        db.close();
+
+        if (cursor.getCount() != 0){
+            return true;
+        }
         return false;
     }
 
     /**
-     * Modify a cart item
+     * Modify a cart item qty
      */
-    public void modifyCartItem(CartItem newitem){
-
+    public void modifyCartItemQty(CartItem newitem){
+        String query = "UPDATE " + TABLE_CART_ITEM + " SET " + KEY_CART_ITEM_QTY + " = " + newitem.get_qty() + " WHERE " + KEY_CART_ITEM_CART_ID + " = " + newitem.getCartID() +
+                " AND " + KEY_CART_ITEM_NAME + " = '" + newitem.get_name() + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(query);
+        db.close();
     }
 }

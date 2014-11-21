@@ -6,22 +6,20 @@ package com.itachi1706.ngeeannfoodservice.cart;
  */
 public class CartItem {
 
-    private int _id, _cart_id, _qty;
+    private int _cart_id, _qty;
     private String _name, _location;
     private double _price;
     int count = 0;
 
     public CartItem(){}
     public CartItem(int cartid, String name, String location, double price, int qty){
-        this._id = count;
-        count++;
+        this._cart_id = cartid;
         this._name = name;
         this._location = location;
         this._price = price;
         this._qty = qty;
     }
 
-    public int getID(){ return this._id; }
     public void setCartID(int cart_id) { this._cart_id = cart_id; }
     public int getCartID(){ return this._cart_id; }
     public String get_location() {return _location;}
