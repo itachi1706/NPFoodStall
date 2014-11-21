@@ -5,15 +5,20 @@ import android.app.AlertDialog;
 import android.app.LauncherActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.itachi1706.ngeeannfoodservice.cart.Cart;
+import com.itachi1706.ngeeannfoodservice.cart.CartItem;
 import com.itachi1706.ngeeannfoodservice.init.FoodItemListAdapter;
 
 import java.util.ArrayList;
@@ -55,21 +60,44 @@ public class ListItemInStall extends ActionBarActivity {
                 lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        FoodItem itemSelected = (FoodItem) lvItems.getItemAtPosition(position);
+                        final FoodItem itemSelected = (FoodItem) lvItems.getItemAtPosition(position);
+                        final EditText input = new EditText(getApplicationContext());
+                        input.setHint("Insert Quantity to Reserve");
+                        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        input.setTextColor(Color.BLACK);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(ListItemInStall.this);
+                        dialog.setView(input);
                         dialog.setTitle("Item Selected").setMessage("Selected Item: " + itemSelected.getName() + "\nPrice: " +
-                        itemSelected.getPrice());
+                                itemSelected.getPrice());
                         dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                int qty = Integer.parseInt(input.getText().toString());
+                                ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
+                                Cart cart;
+                                if (db.checkIfCartAlreadyExist()){
+                                    cart = db.getCartAndItem().get(0);
+                                }
+                                else {
+                                    cart = new Cart(getApplicationContext());
+                                }
+                                CartItem ci = new CartItem(cart.get_cartId(), itemSelected.getName(), stall.getLocation() ,itemSelected.getPrice(), qty);
+                                ArrayList<CartItem> carts = cart.get_cartItems();
+                                carts.add(ci);
+                                cart.set_cartItems(carts);
+                                db.addItemToCart(ci);
+                                new AlertDialog.Builder(getApplicationContext()).setTitle("Item Added").setMessage("Reserved " + qty + " " + itemSelected.getName())
+                                        .setPositiveButton(android.R.string.ok, null).setNegativeButton("Go to Cart", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(getApplicationContext(), "CART ACTIVITY (UNIMPLEMENTED)", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).show();
                             }
                         });
                         dialog.show();
-                        Toast.makeText(getApplicationContext(), "LAUNCH ALERTDIALOG(ITEMQUANTITY) [UNIMPLEMENTED]", Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
         }
     }

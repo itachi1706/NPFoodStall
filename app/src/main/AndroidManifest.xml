@@ -63,6 +63,10 @@
             android:name="com.itachi1706.ngeeannfoodservice.DebugSettings"
             android:label="@string/title_activity_app_settings" >
         </activity>
+        <activity
+            android:name="com.itachi1706.ngeeannfoodservice.CartActivity"
+            android:label="@string/title_activity_cart" >
+        </activity>
     </application>
 
 </manifest>

@@ -19,5 +19,6 @@
     <string name="title_activity_view_on_maps">View On Map</string>
     <string name="map_key">AIzaSyDnIAjDITteFIvqTrf0amORlWWe3JkAhX8</string>
     <string name="title_activity_list_item_in_stall">ListItemInStall</string>
+    <string name="title_activity_cart">CartActivity</string>
 
 </resources>

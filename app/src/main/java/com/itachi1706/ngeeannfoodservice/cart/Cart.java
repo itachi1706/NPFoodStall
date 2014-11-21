@@ -15,6 +15,8 @@ import java.util.Locale;
  */
 public class Cart {
 
+
+
     private int _cartId;
     private String _datetime;
     private boolean _confirmed;
@@ -41,6 +43,10 @@ public class Cart {
         return _cartId;
     }
 
+    public void set_cartId(int _cartId) {
+        this._cartId = _cartId;
+    }
+
     public boolean is_confirmed() {
         return _confirmed;
     }
@@ -55,5 +61,13 @@ public class Cart {
 
     public void set_cartItems(ArrayList<CartItem> _cartItems) {
         this._cartItems = _cartItems;
+    }
+
+    public String get_datetime() {
+        return _datetime;
+    }
+
+    public void set_datetime(String _datetime) {
+        this._datetime = _datetime;
     }
 }

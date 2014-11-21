@@ -10,6 +10,7 @@ import com.itachi1706.ngeeannfoodservice.cart.Cart;
 import com.itachi1706.ngeeannfoodservice.cart.CartItem;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by Kenneth on 31/10/2014, 8:07 PM
@@ -158,5 +159,47 @@ public class ShoppingCartDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(query);
         db.close();
+    }
+
+    public ArrayList<Cart> getCartAndItem(){
+        String queryString = "SELECT * FROM " + TABLE_CART + " WHERE " + KEY_CART_CHECK + " =0;";
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Cart> results = new ArrayList<Cart>();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        //Loop through and add to list
+        if (cursor.moveToFirst()){
+            do {
+                Cart cart = new Cart();
+                cart.set_cartId(cursor.getInt(0));
+                cart.set_datetime(cursor.getString(1));
+                if (cursor.getInt(2) == 0)
+                    cart.set_confirmed(false);
+                else
+                    cart.set_confirmed(true);
+
+                //Get food item
+                ArrayList<CartItem> items = new ArrayList<CartItem>();
+                String queryStringItems = "SELECT * FROM " + TABLE_CART_ITEM + " WHERE " + KEY_CART_ITEM_CART_ID + " = " + cart.get_cartId() + ";";
+                Cursor subCursor = db.rawQuery(queryStringItems, null);
+                if (subCursor.moveToFirst()){
+                    do {
+                        CartItem it = new CartItem();
+                        it.setCartID(subCursor.getInt(1));
+                        it.set_name(subCursor.getString(2));
+                        it.set_location(subCursor.getString(3));
+                        it.set_price(subCursor.getDouble(4));
+                        it.set_qty(subCursor.getInt(5));
+                        items.add(it);
+                    } while (subCursor.moveToNext());
+                }
+
+                cart.set_cartItems(items);
+
+                results.add(cart);
+
+            } while (cursor.moveToNext());
+        }
+        return results;
     }
 }
