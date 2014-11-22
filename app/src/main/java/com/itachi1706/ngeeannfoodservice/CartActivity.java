@@ -46,7 +46,7 @@ public class CartActivity extends ActionBarActivity {
             cart = db.getCartAndItem().get(0);
             id.setText(cart.get_cartId() + "");
             date.setText(cart.get_datetime() + "");
-            ArrayList<CartItem> itemCart = cart.get_cartItems();
+            final ArrayList<CartItem> itemCart = cart.get_cartItems();
             final CartItemListAdapter adapter = new CartItemListAdapter(this, R.layout.listview_cart_item, itemCart);
             itemsList.setAdapter(adapter);
             Log.d("Cart", "Set Adapter Successfully");
@@ -61,7 +61,7 @@ public class CartActivity extends ActionBarActivity {
                     String itemName = item.get_name();
                     new AlertDialog.Builder(CartActivity.this).setTitle("Item Details")
                             .setMessage("Location: " + item.get_location() + "\nQuantity: " + item.get_qty() + "\nPrice: " + item.get_price())
-                            .setPositiveButton("Close",null).setNeutralButton("Change Quantity",new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Close",null).setNeutralButton("Change Quantity", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             final EditText input = new EditText(getApplicationContext());
@@ -89,10 +89,10 @@ public class CartActivity extends ActionBarActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
                             db.removeItemFromCart(item);
+                            itemCart.remove(item);
                             Toast.makeText(getApplicationContext(), "Removed Item", Toast.LENGTH_SHORT).show();
                             adapter.notifyDataSetChanged();
                             itemsList.setAdapter(adapter);
-                            CartActivity.this.recreate();
                         }
                     }).show();
                 }

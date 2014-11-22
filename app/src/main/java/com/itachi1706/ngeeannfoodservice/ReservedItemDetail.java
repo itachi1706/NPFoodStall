@@ -85,9 +85,9 @@ public class ReservedItemDetail extends ActionBarActivity {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
                                                 db.itemArrived(item);
+                                                item.set_status(true);
                                                 adapter.notifyDataSetChanged();
                                                 items.setAdapter(adapter);
-                                                ReservedItemDetail.this.recreate();
                                                 Toast.makeText(getApplicationContext(), "Recieved " + item.get_name() + " from " + item.get_location(), Toast.LENGTH_SHORT).show();
                                             }
                                         }).setNegativeButton("No", null).show();
