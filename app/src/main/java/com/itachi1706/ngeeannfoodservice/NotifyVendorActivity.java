@@ -33,6 +33,7 @@ public class NotifyVendorActivity extends ActionBarActivity {
 
         items = (ListView) findViewById(R.id.lvItems);
         lol = (TextView) findViewById(R.id.tvLol);
+        updateList();
 
     }
 
