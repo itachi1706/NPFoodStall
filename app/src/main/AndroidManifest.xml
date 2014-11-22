@@ -75,6 +75,14 @@
             android:name="com.itachi1706.ngeeannfoodservice.ReservedItemDetail"
             android:label="@string/title_activity_reserved_item_detail" >
         </activity>
+        <activity
+            android:name="com.itachi1706.ngeeannfoodservice.NotifyVendorActivity"
+            android:label="@string/title_activity_notify_vendor" >
+        </activity>
+        <activity
+            android:name="com.itachi1706.ngeeannfoodservice.init.NotifyVendorIntent"
+            android:label="@string/title_activity_notify_vendor_intent" >
+        </activity>
     </application>
 
 </manifest>

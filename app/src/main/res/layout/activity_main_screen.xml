@@ -24,7 +24,8 @@
         android:id="@+id/lvMainItemsUnclaimed"
         android:layout_below="@+id/lblUnclaimed"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/tvStdId" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -34,5 +35,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/lblUnclaimed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Student ID:"
+        android:id="@+id/tvStdId"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

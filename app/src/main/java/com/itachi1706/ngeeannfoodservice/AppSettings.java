@@ -79,6 +79,31 @@ public class AppSettings extends ActionBarActivity {
             Preference pNamePref = findPreference("view_app_name");
             pNamePref.setSummary(packName);
 
+            final Preference pStdIDPref = findPreference("studentID");
+            final SharedPreferences pe = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            pStdIDPref.setSummary(pe.getString("studentID", "No ID Registered"));
+
+            Preference pLogPref = findPreference("studentIDLog");
+            pLogPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    p.edit().putString("studentID", null).apply();
+                    Toast.makeText(getActivity(), "Logged out", Toast.LENGTH_SHORT).show();
+                    pStdIDPref.setSummary(pe.getString("studentID", "No ID Registered"));
+                    return true;
+                }
+            });
+
+            Preference prefss = findPreference("sendToOwner");
+            prefss.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(new Intent(getActivity(), NotifyVendorActivity.class));
+                    return true;
+                }
+            });
+
             Preference prefs = findPreference("view_sdk_version");
             prefs.setSummary(android.os.Build.VERSION.RELEASE);
         }

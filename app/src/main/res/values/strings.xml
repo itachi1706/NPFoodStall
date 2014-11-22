@@ -23,5 +23,8 @@
     <string name="action_checkout_cart">CHECKOUT</string>
     <string name="title_activity_reserved_items">Reserved Items List</string>
     <string name="title_activity_reserved_item_detail">List #</string>
+    <string name="title_activity_notify_vendor">NotifyVendorActivity</string>
+    <string name="list_vendor_notify">Select Item to send a notification to vendors</string>
+    <string name="title_activity_notify_vendor_intent">NotifyVendorIntent</string>
 
 </resources>

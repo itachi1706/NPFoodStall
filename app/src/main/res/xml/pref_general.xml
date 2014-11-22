@@ -2,7 +2,14 @@
     <PreferenceCategory android:title="General" android:key="general_cat">
         <Preference android:title="Database Version" android:key="dbValue" android:summary="-"/>
         <Preference android:title="Reload Database" android:key="reloaddb" android:summary="Reloads the Database"/>
+        <Preference android:title="Student ID" android:key="studentID" android:summary="-"/>
+        <Preference android:title="Log Out" android:key="studentIDLog" android:summary="Deregisters this device from your Student ID"/>
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="App Info" android:key="info_category">
+        <Preference android:title="Send Notification to Stall Owners" android:key="sendToOwner" android:summary="Sends a test notification to the stall owners"/>
+        <Preference android:title="Send Notification to Student" android:key="sendToStudent" android:summary="Sends a test notification to the student" android:enabled="false"/>
+        </PreferenceCategory>
     <!-- DEBUG Preference -->
     <PreferenceCategory android:title="App Info" android:key="info_category">
         <Preference android:title="App Version" android:key="view_app_version" android:summary="NULL" />
