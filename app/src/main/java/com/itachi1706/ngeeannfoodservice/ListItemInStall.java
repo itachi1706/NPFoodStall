@@ -69,8 +69,8 @@ public class ListItemInStall extends ActionBarActivity {
                         input.setTextColor(Color.BLACK);
                         AlertDialog.Builder dialog = new AlertDialog.Builder(ListItemInStall.this);
                         dialog.setView(input);
-                        dialog.setTitle("Item Selected").setMessage("Selected Item: " + itemSelected.getName() + "\nPrice: " +
-                                itemSelected.getPrice());
+                        dialog.setTitle("Item Selected").setMessage(String.format("Selected Item: " + itemSelected.getName() + "\nPrice: $%.2f",
+                                itemSelected.getPrice()));
                         dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

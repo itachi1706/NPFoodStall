@@ -60,7 +60,7 @@ public class CartActivity extends ActionBarActivity {
                     final CartItem item = (CartItem) itemsList.getItemAtPosition(position);
                     String itemName = item.get_name();
                     new AlertDialog.Builder(CartActivity.this).setTitle("Item Details")
-                            .setMessage("Location: " + item.get_location() + "\nQuantity: " + item.get_qty() + "\nPrice: " + item.get_price())
+                            .setMessage(String.format("Location: " + item.get_location() + "\nQuantity: " + item.get_qty() + "\nPrice: $%.2f", item.get_price()))
                             .setPositiveButton("Close",null).setNeutralButton("Change Quantity", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -90,9 +90,15 @@ public class CartActivity extends ActionBarActivity {
                             ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
                             db.removeItemFromCart(item);
                             itemCart.remove(item);
+
                             Toast.makeText(getApplicationContext(), "Removed Item", Toast.LENGTH_SHORT).show();
                             adapter.notifyDataSetChanged();
                             itemsList.setAdapter(adapter);
+                            if (itemCart.size() == 0){
+                                subTotal.setText("Subtotal: $0.00");
+                            } else {
+                                calculateSubtotal();
+                            }
                         }
                     }).show();
                 }

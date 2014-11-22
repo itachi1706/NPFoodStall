@@ -101,7 +101,8 @@ public class MainScreen extends ActionBarActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     final CartItem foodSel = (CartItem) unclaimedFood.getItemAtPosition(position);
                     new AlertDialog.Builder(MainScreen.this).setTitle(foodSel.get_name())
-                            .setMessage("Location: " + foodSel.get_location() + "\nQuantity: " + foodSel.get_qty() + "\nPrice: " + foodSel.get_price() + "\nReserved List: " + foodSel.getCartID())
+                            .setMessage(String.format("Location: " + foodSel.get_location() + "\nQuantity: " + foodSel.get_qty() + "\nPrice: $%.2f \n" +
+                                    "Reserved List: " + foodSel.getCartID(),foodSel.get_price()))
                             .setNegativeButton("Close", null).setPositiveButton("Confirm Food Recieved", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
