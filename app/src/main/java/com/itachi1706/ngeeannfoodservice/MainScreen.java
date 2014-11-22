@@ -10,12 +10,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +34,13 @@ import com.itachi1706.ngeeannfoodservice.init.InitializeDatabase;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class MainScreen extends ActionBarActivity {
 
-    TextView label;
+    TextView label, stdId;
     ProgressDialog pDialog;
     ListView unclaimedFood, mainMenu;
     String[] menuItems = {"Reserve your food", "View Cart", "View Item reserved"};
@@ -47,6 +52,7 @@ public class MainScreen extends ActionBarActivity {
         setContentView(R.layout.activity_main_screen);
 
         label = (TextView) findViewById(R.id.lblUnclaimed);
+        stdId = (TextView) findViewById(R.id.tvStdId);
         mainMenu = (ListView) findViewById(R.id.lvMainMenu);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuItems);
         mainMenu.setAdapter(adapter);
@@ -148,6 +154,55 @@ public class MainScreen extends ActionBarActivity {
 
         initDatabase();
         checkUnclaimed();
+
+        //Check if student ID is inserted
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        String stdID = pref.getString("studentID", null);
+        if (stdID == null){
+            //No Student ID detected
+            stdId.setText("Student ID: None registered");
+            final EditText inputSID = new EditText(this);
+            inputSID.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+            inputSID.setHint("Enter Student ID");
+            new AlertDialog.Builder(this).setTitle("Enter Student ID").setView(inputSID)
+                    .setMessage("Enter your Ngee Ann Polytechnic Student ID Number. This would be used for identification purposes.")
+                    .setCancelable(false).setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            }).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (inputSID.length() != 0) {
+                        Log.d("REGEX CHECK", IsStudentID(inputSID.getText().toString()) + "");
+                        if (!IsStudentID(inputSID.getText().toString())){
+                            Toast.makeText(getApplicationContext(), "Invalid Student ID. eg.:S10111111A", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            pref.edit().putString("studentID", inputSID.getText().toString().toUpperCase() + "").apply();
+                            stdId.setText("Student ID: " + pref.getString("studentID", "None Registered"));
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Student ID cannot be blank", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+            }).show();
+        } else {
+            stdId.setText("Student ID: " + stdID);
+        }
+    }
+
+    private static boolean IsStudentID(String s) {
+        String pattern = "[S,s][0-9]{8}[A-Z,a-z]";
+        try {
+            Pattern patt = Pattern.compile(pattern);
+            Matcher matcher = patt.matcher(s);
+            return matcher.matches();
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 
     public void initDatabase(){
