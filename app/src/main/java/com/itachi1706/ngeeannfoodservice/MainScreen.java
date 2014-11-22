@@ -72,6 +72,10 @@ public class MainScreen extends ActionBarActivity {
         initDatabase();
 
         unclaimedFood = (ListView) findViewById(R.id.lvMainItemsUnclaimed);
+        checkUnclaimed();
+    }
+
+    private void checkUnclaimed(){
         ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
         ArrayList<Cart> carts = db.getReservedItems();
         final ArrayList<CartItem> finalizedItems = new ArrayList<CartItem>();
@@ -97,7 +101,7 @@ public class MainScreen extends ActionBarActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     final CartItem foodSel = (CartItem) unclaimedFood.getItemAtPosition(position);
                     new AlertDialog.Builder(MainScreen.this).setTitle(foodSel.get_name())
-                            .setMessage("Location: " + foodSel.get_location() + "\nQuantity: " + foodSel.get_qty() + "\nPrice: " + foodSel.get_price())
+                            .setMessage("Location: " + foodSel.get_location() + "\nQuantity: " + foodSel.get_qty() + "\nPrice: " + foodSel.get_price() + "\nReserved List: " + foodSel.getCartID())
                             .setNegativeButton("Close", null).setPositiveButton("Confirm Food Recieved", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -111,7 +115,7 @@ public class MainScreen extends ActionBarActivity {
                                             finalizedItems.remove(foodSel);
                                             ada.notifyDataSetChanged();
                                             unclaimedFood.setAdapter(ada);
-                                            if (finalizedItems.size() == 0){
+                                            if (finalizedItems.size() == 0) {
                                                 unclaimedFood.setVisibility(View.GONE);
                                                 label.setVisibility(View.GONE);
                                             }
@@ -142,6 +146,7 @@ public class MainScreen extends ActionBarActivity {
         super.onResume();   //Call superclass method first
 
         initDatabase();
+        checkUnclaimed();
     }
 
     public void initDatabase(){

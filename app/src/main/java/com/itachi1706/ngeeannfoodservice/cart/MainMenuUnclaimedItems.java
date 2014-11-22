@@ -59,7 +59,7 @@ public class MainMenuUnclaimedItems extends ArrayAdapter<CartItem> {
                 }
             }
             if (itemLocation != null){
-                itemLocation.setText(i.get_location() + " (List: " + i.getCartID() + ")");
+                itemLocation.setText(i.get_location());
             }
         }
         return v;
