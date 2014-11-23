@@ -29,15 +29,45 @@ public class ViewOnMaps extends FragmentActivity implements GoogleMap.OnInfoWind
     static final MarkerOptions canteen4 =  new MarkerOptions()
             .position(new LatLng(1.332796, 103.771441))
             .title("Canteen 4").flat(true)
-            .snippet("<Erm...>, Ngee Ann Polytechnic, Singapore");
+            .snippet("Blk 43, Ngee Ann Polytechnic, Singapore");
     static final MarkerOptions poolside =  new MarkerOptions()
             .position(new LatLng(1.335158, 103.776358))
             .title("Poolside").flat(true)
-            .snippet("Sports Complex (Blk ?), Ngee Ann Polytechnic, Singapore");
+            .snippet("Sports Complex (Blk 16), Ngee Ann Polytechnic, Singapore");
+
+    //Special
     static final MarkerOptions kfc = new MarkerOptions()
-            .position(new LatLng(1.3368521, 103.7748117))
+            .position(new LatLng(1.339022, 103.778815))
             .title("KFC").flat(true)
             .snippet("Bukit Timah Plaza, 1 Jalan Anak Bukit, Singapore");
+    static final MarkerOptions pizzaHut = new MarkerOptions()
+            .position(new LatLng(1.339022, 103.778815))
+            .title("Pizza Hut").flat(true)
+            .snippet("Bukit Timah Plaza, 1 Jalan Anak Bukit, Singapore");
+    static final MarkerOptions mcdonald = new MarkerOptions()
+            .position(new LatLng(1.341804, 103.776423))
+            .title("McDonalds").flat(true)
+            .snippet("Beauty World Plaza, 140 Upper Bukit Timah Rd, Singapore");
+    static final MarkerOptions starbucks = new MarkerOptions()
+            .position(new LatLng(1.309649, 103.779213))
+            .title("Starbucks Coffee").flat(true)
+            .snippet("Food Court 5, Singapore Polytechnic, 500 Dover Road, Singapore");
+    static final MarkerOptions coffeebean = new MarkerOptions()
+            .position(new LatLng(1.332811, 103.774624))
+            .title("Coffee Bean").flat(true)
+            .snippet("Blk 53, Ngee Ann Polytechnic, Singapore");
+    static final MarkerOptions sushi = new MarkerOptions()
+            .position(new LatLng(1.331881, 103.775616))
+            .title("Sakae Sushi").flat(true)
+            .snippet("OurSpace@72, Ngee Ann Polytechnic, Singapore");
+    static final MarkerOptions subway = new MarkerOptions()
+            .position(new LatLng(1.332238, 103.774526))
+            .title("Subway").flat(true)
+            .snippet("Makan Place, Blk 51, Ngee Ann Polytechnic, Singapore");
+    static final MarkerOptions mosBurger =  new MarkerOptions()
+            .position(new LatLng(1.335158, 103.776358))
+            .title("MOS Burger").flat(true)
+            .snippet("Poolside, Sports Complex (Blk 16), Ngee Ann Polytechnic, Singapore");
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     String location;
 
@@ -133,6 +163,48 @@ public class ViewOnMaps extends FragmentActivity implements GoogleMap.OnInfoWind
             t.show();
             mMap.addMarker(munch).showInfoWindow();
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(munch.getPosition(), 20);
+            mMap.animateCamera(update);
+        //Special
+
+        } else if (location.equals("Subway")) {
+            t.show();
+            mMap.addMarker(subway).showInfoWindow();
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(subway.getPosition(), 20);
+            mMap.animateCamera(update);
+        } else if (location.equals("Coffee Bean")) {
+            t.show();
+            mMap.addMarker(coffeebean).showInfoWindow();
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(coffeebean.getPosition(), 20);
+            mMap.animateCamera(update);
+        } else if (location.equals("Sakae Sushi")) {
+            t.show();
+            mMap.addMarker(sushi).showInfoWindow();
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(sushi.getPosition(), 20);
+            mMap.animateCamera(update);
+        } else if (location.equals("McDonalds")) {
+            t.show();
+            mMap.addMarker(mcdonald).showInfoWindow();
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(mcdonald.getPosition(), 20);
+            mMap.animateCamera(update);
+        } else if (location.equals("KFC")) {
+            t.show();
+            mMap.addMarker(kfc).showInfoWindow();
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(kfc.getPosition(), 20);
+            mMap.animateCamera(update);
+        } else if (location.equals("Pizza Hut")) {
+            t.show();
+            mMap.addMarker(pizzaHut).showInfoWindow();
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(pizzaHut.getPosition(), 20);
+            mMap.animateCamera(update);
+        } else if (location.equals("MOS Burger")) {
+            t.show();
+            mMap.addMarker(mosBurger).showInfoWindow();
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(mosBurger.getPosition(), 20);
+            mMap.animateCamera(update);
+        } else if (location.equals("Starbucks Coffee")) {
+            t.show();
+            mMap.addMarker(starbucks).showInfoWindow();
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(starbucks.getPosition(), 20);
             mMap.animateCamera(update);
         } else {
             Toast.makeText(getApplicationContext(), "Unknown Location: " + location, Toast.LENGTH_SHORT).show();

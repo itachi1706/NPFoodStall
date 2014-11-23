@@ -1,6 +1,8 @@
 package com.itachi1706.ngeeannfoodservice;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -16,7 +18,8 @@ import android.widget.Toast;
 public class SelectCanteen extends ActionBarActivity {
 
     ListView lvCanteen;
-    String[] listOfCanteens = {"Makan Place", "Poolside", "Canteen 4", "Munch", "KFC", "Starbucks", "Coffee Bean"};
+    String[] listOfCanteens = {"Makan Place", "Poolside", "Canteen 4", "Munch", "KFC", "Starbucks Coffee", "Coffee Bean", "McDonalds",
+            "Pizza Hut", "MOS Burger", "Subway", "Sakae Sushi"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,7 @@ public class SelectCanteen extends ActionBarActivity {
         lvCanteen = (ListView) findViewById(R.id.lvSelectCanteen);
 
         //Displays List
-        ArrayAdapter<String> canteenAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfCanteens);
+        final ArrayAdapter<String> canteenAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfCanteens);
         lvCanteen.setAdapter(canteenAdapter);
 
         //Based on item selected go to activity
@@ -35,27 +38,26 @@ public class SelectCanteen extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
-                String canteenSelected = (String) lvCanteen.getItemAtPosition(position);
+                final String canteenSelected = (String) lvCanteen.getItemAtPosition(position);
 
-                //Toast.makeText(getApplicationContext(), "Selected Canteen: " + canteenSelected, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SelectCanteen.this, ListStalls.class);
-                intent.putExtra("location", canteenSelected);
-                startActivity(intent);
+                if (canteenSelected == listOfCanteens[0] || canteenSelected == listOfCanteens[1] || canteenSelected == listOfCanteens[2] || canteenSelected == listOfCanteens[3]) {
 
-				/*
-				AlertDialog.Builder builder = new Builder(SelectCanteenActivity.this);
-				builder.setTitle("Canteen Selected");
-				builder.setMessage("Selected canteen: " + canteenSelected);
-				builder.setPositiveButton(android.R.string.ok, new OnClickListener(){
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-
-					}
-
-				});
-				builder.show();*/
+                    //Toast.makeText(getApplicationContext(), "Selected Canteen: " + canteenSelected, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SelectCanteen.this, ListStalls.class);
+                    intent.putExtra("location", canteenSelected);
+                    startActivity(intent);
+                } else {
+                    new AlertDialog.Builder(SelectCanteen.this).setTitle("Unsupported Eatery")
+                            .setMessage("Unfortunately, this eatery has yet to support this application. However, you can click the show on map button to show " +
+                            "the nearest location of the eatery from the school.").setPositiveButton("Show on Maps", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(SelectCanteen.this, ViewOnMaps.class);
+                            intent.putExtra("location", canteenSelected);
+                            startActivity(intent);
+                        }
+                    }).setNegativeButton(android.R.string.cancel, null).show();
+                }
             }
         });
     }
