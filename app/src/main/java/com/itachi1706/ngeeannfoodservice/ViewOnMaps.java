@@ -34,6 +34,10 @@ public class ViewOnMaps extends FragmentActivity implements GoogleMap.OnInfoWind
             .position(new LatLng(1.335158, 103.776358))
             .title("Poolside").flat(true)
             .snippet("Sports Complex (Blk ?), Ngee Ann Polytechnic, Singapore");
+    static final MarkerOptions kfc = new MarkerOptions()
+            .position(new LatLng(1.3368521, 103.7748117))
+            .title("KFC").flat(true)
+            .snippet("Bukit Timah Plaza, 1 Jalan Anak Bukit, Singapore");
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     String location;
 
