@@ -263,6 +263,30 @@ public class ShoppingCartDBHandler extends SQLiteOpenHelper {
         return results;
     }
 
+    public CartItem getCartItem(String name, String location){
+        String query = "SELECT * FROM " + TABLE_CART_ITEM + " WHERE " + KEY_CART_ITEM_LOCATION + " = '" + location +
+                "' AND " + KEY_CART_ITEM_NAME + " = '" + name + "' AND " + KEY_CART_ITEM_STATUS + " =0;";
+        SQLiteDatabase db = this.getReadableDatabase();
+        CartItem result = new CartItem();
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do {
+                result.set_name(cursor.getString(2));
+                result.setCartID(cursor.getInt(1));
+                result.set_qty(cursor.getInt(5));
+                result.set_location(cursor.getString(4));
+                result.set_price(cursor.getDouble(3));
+                if (cursor.getInt(6) == 0)
+                    result.set_status(false);
+                else
+                    result.set_status(true);
+
+            } while (cursor.moveToNext());
+        }
+        return result;
+    }
+
     public ArrayList<Cart> getReservedItems(){
         String queryString = "SELECT * FROM " + TABLE_CART + " WHERE " + KEY_CART_CHECK + " =1;";
         SQLiteDatabase db = this.getReadableDatabase();

@@ -1,7 +1,6 @@
 package com.itachi1706.ngeeannfoodservice;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -23,12 +22,10 @@ import com.itachi1706.ngeeannfoodservice.cart.CartItem;
 import com.itachi1706.ngeeannfoodservice.cart.MainMenuUnclaimedItems;
 import com.itachi1706.ngeeannfoodservice.init.NotifyVendorIntent;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-//PROTOTYPE
-public class NotifyVendorActivity extends ActionBarActivity {
+
+public class NotifyUserActivity extends ActionBarActivity {
 
     ListView items;
     TextView lol;
@@ -36,13 +33,26 @@ public class NotifyVendorActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notify_vendor);
+        setContentView(R.layout.activity_notify_user);
 
-        items = (ListView) findViewById(R.id.lvItems);
-        lol = (TextView) findViewById(R.id.tvLol);
-        updateList();
+        if (this.getIntent().hasExtra("food")){
+            String name = this.getIntent().getStringExtra("food");
+            String location = this.getIntent().getStringExtra("location");
+            int qty = this.getIntent().getIntExtra("qty", 0);
+            CartItem ci = new CartItem();
+            ci.set_location(location);
+            ci.set_name(name);
+            ci.set_qty(qty);
+            sendNotification(ci);
+            finish();
+        } else {
 
+            items = (ListView) findViewById(R.id.lvItems);
+            lol = (TextView) findViewById(R.id.tvLol);
+            updateList();
+        }
     }
+
 
     private void updateList(){
         ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
@@ -65,30 +75,34 @@ public class NotifyVendorActivity extends ActionBarActivity {
             lol.setText(this.getResources().getString(R.string.list_vendor_notify));
             final MainMenuUnclaimedItems ada = new MainMenuUnclaimedItems(this, R.layout.listview_reserved_item, finalizedItems);
             items.setAdapter(ada);
-            final Intent resultIntent = new Intent(this, NotifyVendorIntent.class);
 
             final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
             items.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     final CartItem foodSel = (CartItem) items.getItemAtPosition(position);
-                    resultIntent.putExtra("location", foodSel.get_location());
-                    resultIntent.putExtra("food", foodSel.get_name());
-                    resultIntent.putExtra("qty", foodSel.get_qty());
-                    final PendingIntent notifyPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    Toast.makeText(getApplicationContext(), "Sent a test notification for " + foodSel.get_name(), Toast.LENGTH_SHORT).show();
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(NotifyVendorActivity.this)
-                            .setSmallIcon(R.drawable.ic_launcher).setContentTitle("Item Reservation")
-                            .setSubText(foodSel.get_qty() + "x " + foodSel.get_name() + " reserved!")
-                            .setContentIntent(notifyPendingIntent).setAutoCancel(true)
-                            .setContentText("Student ID: " + pref.getString("studentID", "None"))
-                            .setTicker("New Food Reservation from " + pref.getString("studentID", "Unknown"));
-                    int notifyID = 001;
-                    NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                    mgr.notify(notifyID, builder.build());
+                    sendNotification(foodSel);
                 }
             });
 
         }
+    }
+
+    private void sendNotification(CartItem foodSel){
+        final Intent resultIntent = new Intent(this, NotifyUserIntent.class);
+        resultIntent.putExtra("location", foodSel.get_location());
+        resultIntent.putExtra("food", foodSel.get_name());
+        resultIntent.putExtra("qty", foodSel.get_qty());
+        final PendingIntent notifyPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Toast.makeText(getApplicationContext(), "Sent a test notification for " + foodSel.get_name(), Toast.LENGTH_SHORT).show();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(NotifyUserActivity.this)
+                .setSmallIcon(R.drawable.ic_launcher).setContentTitle("Food Order has been prepared")
+                .setSubText(foodSel.get_qty() + "x " + foodSel.get_name() + " has been prepared!")
+                .setContentIntent(notifyPendingIntent).setAutoCancel(true)
+                .setContentText("Food Location: " + foodSel.get_location())
+                .setTicker("One of your food order has been prepared! Please claim your food from " + foodSel.get_location());
+        int notifyID = 001;
+        NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mgr.notify(notifyID, builder.build());
     }
 }

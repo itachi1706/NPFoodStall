@@ -83,6 +83,14 @@
             android:name="com.itachi1706.ngeeannfoodservice.init.NotifyVendorIntent"
             android:label="@string/title_activity_notify_vendor_intent" >
         </activity>
+        <activity
+            android:name="com.itachi1706.ngeeannfoodservice.NotifyUserActivity"
+            android:label="@string/title_activity_notify_user" >
+        </activity>
+        <activity
+            android:name="com.itachi1706.ngeeannfoodservice.NotifyUserIntent"
+            android:label="@string/title_activity_notify_user_intent" >
+        </activity>
     </application>
 
 </manifest>

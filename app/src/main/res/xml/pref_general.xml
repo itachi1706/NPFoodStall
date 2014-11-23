@@ -8,7 +8,7 @@
 
     <PreferenceCategory android:title="App Info" android:key="info_category">
         <Preference android:title="Send Notification to Stall Owners" android:key="sendToOwner" android:summary="Sends a test notification to the stall owners"/>
-        <Preference android:title="Send Notification to Student" android:key="sendToStudent" android:summary="Sends a test notification to the student" android:enabled="false"/>
+        <Preference android:title="Send Notification to Student" android:key="sendToStudent" android:summary="Sends a test notification to the student"/>
         </PreferenceCategory>
     <!-- DEBUG Preference -->
     <PreferenceCategory android:title="App Info" android:key="info_category">

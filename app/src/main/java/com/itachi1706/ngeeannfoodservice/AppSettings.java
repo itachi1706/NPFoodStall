@@ -104,6 +104,15 @@ public class AppSettings extends ActionBarActivity {
                 }
             });
 
+            Preference prefsss = findPreference("sendToStudent");
+            prefsss.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(new Intent(getActivity(), NotifyUserActivity.class));
+                    return true;
+                }
+            });
+
             Preference prefs = findPreference("view_sdk_version");
             prefs.setSummary(android.os.Build.VERSION.RELEASE);
         }
