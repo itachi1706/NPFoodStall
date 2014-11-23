@@ -173,7 +173,7 @@ public class MainScreen extends ActionBarActivity {
         inputSID.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         inputSID.setHint("Enter Student ID");
         new AlertDialog.Builder(this).setTitle("Enter Student ID").setView(inputSID)
-                .setMessage("Enter your Ngee Ann Polytechnic Student ID Number. This would be used for identification purposes.")
+                .setMessage("Enter your Ngee Ann Polytechnic Student ID Number (E.g. S10123123A). This would be used for identification purposes.")
                 .setCancelable(false).setNegativeButton("Quit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -185,7 +185,7 @@ public class MainScreen extends ActionBarActivity {
                 if (inputSID.length() != 0) {
                     Log.d("REGEX CHECK", IsStudentID(inputSID.getText().toString()) + "");
                     if (!IsStudentID(inputSID.getText().toString())){
-                        Toast.makeText(getApplicationContext(), "Invalid Student ID. eg.:S10111111A", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Invalid Student ID. eg.:S10123123A", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         pref.edit().putString("studentID", inputSID.getText().toString().toUpperCase() + "").apply();
@@ -210,7 +210,7 @@ public class MainScreen extends ActionBarActivity {
         inputSIDs.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         inputSIDs.setHint("Enter Staff Email");
         new AlertDialog.Builder(MainScreen.this).setTitle("Enter NP Staff Email").setView(inputSIDs)
-                .setMessage("Enter your Staff Ngee Ann Polytechnic Email Address. This would be used for identification purposes.")
+                .setMessage("Enter your Staff Ngee Ann Polytechnic Email Address (E.g. staffemail@np.edu.sg). This would be used for identification purposes.")
                 .setCancelable(false).setNegativeButton("Quit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -222,7 +222,7 @@ public class MainScreen extends ActionBarActivity {
                 if (inputSIDs.length() != 0) {
                     Log.d("REGEX CHECK", IsStaffID(inputSIDs.getText().toString()) + "");
                     if (!IsStaffID(inputSIDs.getText().toString())) {
-                        Toast.makeText(getApplicationContext(), "Invalid Staff ID. eg.:asm@np.edu.sg", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Invalid Staff ID. eg.:staffemail@np.edu.sg", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         pref.edit().putString("studentID", inputSIDs.getText().toString().toUpperCase() + "").apply();
