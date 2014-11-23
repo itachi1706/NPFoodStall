@@ -54,6 +54,17 @@ public class AppSettings extends ActionBarActivity {
                 }
             });
 
+            Preference loadPref = findPreference("reloadCdb");
+            loadPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    ShoppingCartDBHandler db = new ShoppingCartDBHandler(getActivity().getApplicationContext());
+                    db.dropAndRebuildDB();
+                    Toast.makeText(getActivity().getApplicationContext(), "Reset Database", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
+
             Preference devInfoPref = findPreference("vDevInfo");
             devInfoPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override

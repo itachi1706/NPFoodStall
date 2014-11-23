@@ -71,6 +71,13 @@ public class ShoppingCartDBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void dropAndRebuildDB(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CART);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CART_ITEM);
+        onCreate(db);
+    }
+
     public int createCartRecordWithId(String date){
         String sql = "INSERT INTO " + TABLE_CART + "(" + KEY_CART_CHECK + ", " + KEY_CART_DATETIME + ") VALUES (0, '" + date + "');";
         SQLiteDatabase db = this.getWritableDatabase();
