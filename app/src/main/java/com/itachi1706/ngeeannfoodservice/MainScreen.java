@@ -207,7 +207,7 @@ public class MainScreen extends ActionBarActivity {
     private void callStaff(){
         final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         final EditText inputSIDs = new EditText(MainScreen.this);
-        inputSIDs.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        inputSIDs.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         inputSIDs.setHint("Enter Staff Email");
         new AlertDialog.Builder(MainScreen.this).setTitle("Enter NP Staff Email").setView(inputSIDs)
                 .setMessage("Enter your Staff Ngee Ann Polytechnic Email Address (E.g. staffemail@np.edu.sg). This would be used for identification purposes.")
