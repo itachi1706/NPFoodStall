@@ -160,42 +160,100 @@ public class MainScreen extends ActionBarActivity {
         String stdID = pref.getString("studentID", null);
         if (stdID == null){
             //No Student ID detected
-            stdId.setText("Student ID: None registered");
-            final EditText inputSID = new EditText(this);
-            inputSID.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-            inputSID.setHint("Enter Student ID");
-            new AlertDialog.Builder(this).setTitle("Enter Student ID").setView(inputSID)
-                    .setMessage("Enter your Ngee Ann Polytechnic Student ID Number. This would be used for identification purposes.")
-                    .setCancelable(false).setNegativeButton("Quit", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            stdId.setText("Student/Staff ID: None registered");
+            callStudent();
+        } else {
+            stdId.setText("Student/Staff ID: " + stdID);
+        }
+    }
+
+    private void callStudent(){
+        final EditText inputSID = new EditText(this);
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        inputSID.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        inputSID.setHint("Enter Student ID");
+        new AlertDialog.Builder(this).setTitle("Enter Student ID").setView(inputSID)
+                .setMessage("Enter your Ngee Ann Polytechnic Student ID Number. This would be used for identification purposes.")
+                .setCancelable(false).setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        }).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (inputSID.length() != 0) {
+                    Log.d("REGEX CHECK", IsStudentID(inputSID.getText().toString()) + "");
+                    if (!IsStudentID(inputSID.getText().toString())){
+                        Toast.makeText(getApplicationContext(), "Invalid Student ID. eg.:S10111111A", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        pref.edit().putString("studentID", inputSID.getText().toString().toUpperCase() + "").apply();
+                        stdId.setText("Student/Staff ID: " + pref.getString("studentID", "None Registered"));
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Student ID cannot be blank", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-            }).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (inputSID.length() != 0) {
-                        Log.d("REGEX CHECK", IsStudentID(inputSID.getText().toString()) + "");
-                        if (!IsStudentID(inputSID.getText().toString())){
-                            Toast.makeText(getApplicationContext(), "Invalid Student ID. eg.:S10111111A", Toast.LENGTH_SHORT).show();
-                            finish();
-                        } else {
-                            pref.edit().putString("studentID", inputSID.getText().toString().toUpperCase() + "").apply();
-                            stdId.setText("Student ID: " + pref.getString("studentID", "None Registered"));
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Student ID cannot be blank", Toast.LENGTH_SHORT).show();
+            }
+        }).setNeutralButton("I am a NP Staff", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                callStaff();
+            }
+        }).show();
+    }
+
+    private void callStaff(){
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        final EditText inputSIDs = new EditText(MainScreen.this);
+        inputSIDs.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        inputSIDs.setHint("Enter Staff Email");
+        new AlertDialog.Builder(MainScreen.this).setTitle("Enter NP Staff Email").setView(inputSIDs)
+                .setMessage("Enter your Staff Ngee Ann Polytechnic Email Address. This would be used for identification purposes.")
+                .setCancelable(false).setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        }).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (inputSIDs.length() != 0) {
+                    Log.d("REGEX CHECK", IsStaffID(inputSIDs.getText().toString()) + "");
+                    if (!IsStaffID(inputSIDs.getText().toString())) {
+                        Toast.makeText(getApplicationContext(), "Invalid Staff ID. eg.:asm@np.edu.sg", Toast.LENGTH_SHORT).show();
                         finish();
+                    } else {
+                        pref.edit().putString("studentID", inputSIDs.getText().toString().toUpperCase() + "").apply();
+                        stdId.setText("Student/Staff ID: " + pref.getString("studentID", "None Registered"));
                     }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Staff Email Address cannot be blank", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-            }).show();
-        } else {
-            stdId.setText("Student ID: " + stdID);
-        }
+            }
+        }).setNeutralButton("I am a NP Student", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                callStudent();
+            }
+        }).show();
     }
 
     private static boolean IsStudentID(String s) {
         String pattern = "[S,s][0-9]{8}[A-Z,a-z]";
+        try {
+            Pattern patt = Pattern.compile(pattern);
+            Matcher matcher = patt.matcher(s);
+            return matcher.matches();
+        } catch (RuntimeException e) {
+            return false;
+        }
+    }
+
+    private static boolean IsStaffID(String s) {
+        String pattern = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@np\\.edu\\.sg";
         try {
             Pattern patt = Pattern.compile(pattern);
             Matcher matcher = patt.matcher(s);

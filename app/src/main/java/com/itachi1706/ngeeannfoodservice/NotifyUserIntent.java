@@ -24,9 +24,9 @@ public class NotifyUserIntent extends Activity {
         final String location = this.getIntent().getStringExtra("location");
         final int qty = this.getIntent().getIntExtra("qty", 0);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String studentID = pref.getString("studentID", "Error: (No Student ID)");
+        String studentID = pref.getString("studentID", "Error: (No ID)");
         new AlertDialog.Builder(this).setTitle("Food Item Prepared")
-                .setMessage("Student: " + studentID + "\nFood Item: " + foodName + "\nQuantity: " + qty + "\nLocation: " + location)
+                .setMessage("Student/Staff ID: " + studentID + "\nFood Item: " + foodName + "\nQuantity: " + qty + "\nLocation: " + location)
                 .setPositiveButton("Close", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

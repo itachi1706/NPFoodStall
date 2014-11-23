@@ -3,8 +3,8 @@
         <Preference android:title="Database Version" android:key="dbValue" android:summary="-"/>
         <Preference android:title="Reload Database" android:key="reloaddb" android:summary="Reloads the Database"/>
         <Preference android:title="Reset Cart Database" android:key="reloadCdb" android:summary="Reloads the database for your orders"/>
-        <Preference android:title="Student ID" android:key="studentID" android:summary="-"/>
-        <Preference android:title="Log Out" android:key="studentIDLog" android:summary="Deregisters this device from your Student ID"/>
+        <Preference android:title="Student/Staff ID" android:key="studentID" android:summary="-"/>
+        <Preference android:title="Log Out" android:key="studentIDLog" android:summary="Deregisters this device from your Student/Staff ID"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Testing" android:key="info_category">

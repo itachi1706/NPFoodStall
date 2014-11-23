@@ -24,9 +24,9 @@ public class NotifyVendorIntent extends Activity {
         final String location = this.getIntent().getStringExtra("location");
         final int qty = this.getIntent().getIntExtra("qty", 0);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String studentID = pref.getString("studentID", "Error: (No Student ID)");
+        String studentID = pref.getString("studentID", "Error: (No ID)");
         new AlertDialog.Builder(this).setTitle("Incoming Food Reservation")
-                .setMessage("Student: " + studentID + "\nFood Item: " + foodName + "\nQuantity: " + qty)
+                .setMessage("Student/Staff ID: " + studentID + "\nFood Item: " + foodName + "\nQuantity: " + qty)
                 .setPositiveButton("Close", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -40,7 +40,7 @@ public class NotifyVendorIntent extends Activity {
                 intent.putExtra("location", location);
                 intent.putExtra("qty", qty);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Notified student that food has been prepared", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Notified student/staff that food has been prepared", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }).show();

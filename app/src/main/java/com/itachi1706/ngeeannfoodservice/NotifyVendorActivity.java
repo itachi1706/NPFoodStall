@@ -81,7 +81,7 @@ public class NotifyVendorActivity extends ActionBarActivity {
                             .setSmallIcon(R.drawable.ic_launcher).setContentTitle("Item Reservation")
                             .setSubText(foodSel.get_qty() + "x " + foodSel.get_name() + " reserved!")
                             .setContentIntent(notifyPendingIntent).setAutoCancel(true)
-                            .setContentText("Student ID: " + pref.getString("studentID", "None"))
+                            .setContentText("Student/Staff ID: " + pref.getString("studentID", "None"))
                             .setTicker("New Food Reservation from " + pref.getString("studentID", "Unknown"));
                     int notifyID = 001;
                     NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
