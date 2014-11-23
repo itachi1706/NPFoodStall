@@ -225,7 +225,7 @@ public class MainScreen extends ActionBarActivity {
                         Toast.makeText(getApplicationContext(), "Invalid Staff ID. eg.:staffemail@np.edu.sg", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        pref.edit().putString("studentID", inputSIDs.getText().toString().toUpperCase() + "").apply();
+                        pref.edit().putString("studentID", inputSIDs.getText().toString().toLowerCase() + "").apply();
                         stdId.setText("Student/Staff ID: " + pref.getString("studentID", "None Registered"));
                     }
                 } else {

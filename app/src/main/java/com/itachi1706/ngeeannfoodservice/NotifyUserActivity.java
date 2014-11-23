@@ -101,7 +101,7 @@ public class NotifyUserActivity extends ActionBarActivity {
                 .setContentIntent(notifyPendingIntent).setAutoCancel(true)
                 .setContentText("Food Location: " + foodSel.get_location())
                 .setTicker("One of your food order has been prepared! Please claim your food from " + foodSel.get_location());
-        int notifyID = 001;
+        int notifyID = (int) (1 * (Math.random()*100));
         NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mgr.notify(notifyID, builder.build());
     }

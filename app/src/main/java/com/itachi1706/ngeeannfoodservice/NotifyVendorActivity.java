@@ -83,7 +83,7 @@ public class NotifyVendorActivity extends ActionBarActivity {
                             .setContentIntent(notifyPendingIntent).setAutoCancel(true)
                             .setContentText("Student/Staff ID: " + pref.getString("studentID", "None"))
                             .setTicker("New Food Reservation from " + pref.getString("studentID", "Unknown"));
-                    int notifyID = 001;
+                    int notifyID = (int) (100 * (Math.random()*100));
                     NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                     mgr.notify(notifyID, builder.build());
                 }
