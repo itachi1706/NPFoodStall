@@ -49,19 +49,74 @@ public class DemoSettings extends ActionBarActivity {
 
             //DEMO
             Preference demo1 = findPreference("demoInstall");
-            demo1.setEnabled(false);
+            demo1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent dem1 = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.yt_install)));
+                    startActivity(dem1);
+                    return true;
+                }
+            });
+
             Preference demo2 = findPreference("demoUpgrade");
-            demo2.setEnabled(false);
+            demo2.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent dem2 = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.yt_update)));
+                    startActivity(dem2);
+                    return true;
+                }
+            });
+
             Preference demo3 = findPreference("demoAdd");
-            demo3.setEnabled(false);
+            demo3.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent dem3 = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.yt_order)));
+                    startActivity(dem3);
+                    return true;
+                }
+            });
+
             Preference demo4 = findPreference("demoCheckout");
-            demo4.setEnabled(false);
+            demo4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent dem4 = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.yt_modify)));
+                    startActivity(dem4);
+                    return true;
+                }
+            });
+
             Preference demo5 = findPreference("demoCollection");
-            demo5.setEnabled(false);
+            demo5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent dem5 = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.yt_confirm)));
+                    startActivity(dem5);
+                    return true;
+                }
+            });
+
             Preference demo6 = findPreference("demiDirections");
-            demo6.setEnabled(false);
+            demo6.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent dem6 = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.yt_location)));
+                    startActivity(dem6);
+                    return true;
+                }
+            });
+
             Preference demo7 = findPreference("demoConfirm");
-            demo7.setEnabled(false);
+            demo7.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent dem7 = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.yt_notify)));
+                    startActivity(dem7);
+                    return true;
+                }
+            });
         }
     }
 
