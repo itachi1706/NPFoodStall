@@ -265,18 +265,18 @@ public class MainScreen extends ActionBarActivity {
 
     public void initDatabase(){
         //Toast.makeText(getApplicationContext(), Build.PRODUCT.toString(), Toast.LENGTH_SHORT).show();
-        if (DatabaseHandler.checkIfSDK()){
+        /*if (DatabaseHandler.checkIfSDK()){
             AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Error with SDK :(")
                     .setMessage("There will be an error if you use an SDK to access emulator this app\n"
                                     + "Please use an actual Android device to test this application.")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            MainScreen.this.finish();
+                            //MainScreen.this.finish();
                         }
                     });
             builder.show();
-        } else {
+        }*/ //else {
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
             if (sharedPref.getInt("dbValue", 0) != DB_VER) {
@@ -291,7 +291,7 @@ public class MainScreen extends ActionBarActivity {
                 new InitializeDatabase(pDialog, this).execute();
                 sharedPref.edit().putInt("dbValue", DB_VER).apply();
             }
-        }
+        //}
 
     }
 
