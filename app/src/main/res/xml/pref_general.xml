@@ -5,6 +5,7 @@
         <Preference android:title="Reset Cart Database" android:key="reloadCdb" android:summary="Reloads the database for your orders"/>
         <Preference android:title="Student/Staff ID" android:key="studentID" android:summary="-"/>
         <Preference android:title="Log Out" android:key="studentIDLog" android:summary="Deregisters this device from your Student/Staff ID"/>
+        <Preference android:title="Demo and More Info" android:key="demo" android:summary="Video Tutorials and more information about the app"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Testing" android:key="info_category">

@@ -126,6 +126,15 @@ public class AppSettings extends ActionBarActivity {
 
             Preference prefs = findPreference("view_sdk_version");
             prefs.setSummary(android.os.Build.VERSION.RELEASE);
+
+            Preference demo = findPreference("demo");
+            demo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(new Intent(getActivity(), DemoSettings.class));
+                    return true;
+                }
+            });
         }
     }
 
