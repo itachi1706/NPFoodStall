@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Quick Links" android:key="cat">
+        <Preference android:title="Update Link" android:key="lnk_update" android:summary="@string/link_updates"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Video Tutorials" android:key="general_cat">
+        <Preference android:title="How to Install App" android:key="demoInstall" android:summary="Video showing how the app is installed"/>
+        <Preference android:title="How to Upgrade App" android:key="demoUpgrade" android:summary="Video showing how to update the application"/>
+        <Preference android:title="How to add items into cart" android:key="demoAdd" android:summary="Video showing how to add items into the cart"/>
+        <Preference android:title="How to checkout cart" android:key="demoCheckout" android:summary="Video showing how to checkout your cart and view your previous orders"/>
+        <Preference android:title="How to confirm collection of food" android:key="demoCollection" android:summary="Video showing the ways to confirm your food"/>
+        <Preference android:title="How to find directions to the location" android:key="demiDirections" android:summary="Video showing how to get the directions to the canteen location"/>
+        <Preference android:title="(Vendors) How to send a confirmation message to the orderer" android:key="demoConfirm" android:summary="Video showing how to send confirmation message to the orderer"/>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

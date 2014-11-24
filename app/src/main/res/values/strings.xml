@@ -30,5 +30,6 @@
     <string name="title_activity_notify_vendor_intent">NotifyVendorIntent</string>
     <string name="title_activity_notify_user">Notify User of order completed</string>
     <string name="title_activity_notify_user_intent">NotifyUserIntent</string>
+    <string name="link_updates">http://bit.ly/NPFoodService</string>
 
 </resources>
