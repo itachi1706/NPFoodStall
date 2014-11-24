@@ -34,7 +34,7 @@ public class DemoSettings extends ActionBarActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.pref_general);
+            addPreferencesFromResource(R.xml.pref_demo);
             getPreferenceManager().setSharedPreferencesMode(MODE_MULTI_PROCESS);
             Preference link = findPreference("lnk_update");
             link.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
