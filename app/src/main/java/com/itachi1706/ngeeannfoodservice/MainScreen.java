@@ -43,7 +43,7 @@ public class MainScreen extends ActionBarActivity {
     TextView label, stdId;
     ProgressDialog pDialog;
     ListView unclaimedFood, mainMenu;
-    String[] menuItems = {"Reserve your food", "View Cart", "View Item reserved"};
+    String[] menuItems = {"Reserve your food", "View Cart", "View Reserved Item History"};
     static final int DB_VER = 1;
 
     @Override
@@ -67,7 +67,7 @@ public class MainScreen extends ActionBarActivity {
                 } else if (selected.equals("View Cart")) {
                     intent = new Intent(MainScreen.this, CartActivity.class);
 
-                } else if (selected.equals("View Item reserved")) {
+                } else if (selected.equals("View Reserved Item History")) {
                     intent = new Intent(MainScreen.this, ReservedItems.class);
 
                 }

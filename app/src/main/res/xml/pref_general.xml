@@ -18,6 +18,8 @@
         <Preference android:title="Package Name" android:key="view_app_name"/>
         <Preference android:summary="None" android:title="Android Version" android:key="view_sdk_version"/>
         <Preference android:title="View Device Info" android:key="vDevInfo" android:summary="(Technical) Views information of the device"/>
+        <Preference android:title="Author Info" android:key="vAuthor" android:summary="© 2014 Kenneth Soh"/>
+        <Preference android:title="Submit Bug Report" android:key="vBug" android:summary="Found a bug? Send a bug report to the author here!"/>
     </PreferenceCategory>
 
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -132,6 +133,21 @@ public class AppSettings extends ActionBarActivity {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     startActivity(new Intent(getActivity(), DemoSettings.class));
+                    return true;
+                }
+            });
+
+            Preference bug = findPreference("vBug");
+            bug.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent send = new Intent(Intent.ACTION_SENDTO);
+                    String uriText = "mailto:" + Uri.encode("s10147249@connect.np.edu.sg") +
+                            "?subject=" + Uri.encode("Ngee Ann Food Service Bug Report");
+                    Uri uri = Uri.parse(uriText);
+
+                    send.setData(uri);
+                    startActivity(Intent.createChooser(send, "Send an email"));
                     return true;
                 }
             });
