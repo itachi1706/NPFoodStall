@@ -34,7 +34,7 @@ public class FoodInMunch {
     private static ArrayList<FoodItem> pangangStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
         items.add(new FoodItem(0, 1, "Nasi Ayam Panggang", 2.8));
-        items.add(new FoodItem(0, 1, "Roasted Panggang", 3.5));
+        items.add(new FoodItem(1, 1, "Roasted Panggang", 3.5));
         return items;
     }
     private static ArrayList<FoodItem> westernStall(){
@@ -50,8 +50,8 @@ public class FoodInMunch {
     private static ArrayList<FoodItem> drinkStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
         items.add(new FoodItem(0, 4, "Iced Milo", 1.5));
-        items.add(new FoodItem(0, 4, "Iced Tea", 1));
-        items.add(new FoodItem(0, 4, "Coffee O", 0.6));
+        items.add(new FoodItem(1, 4, "Iced Tea", 1));
+        items.add(new FoodItem(2, 4, "Coffee O", 0.6));
         return items;
     }
     private static ArrayList<FoodItem> wantonStall(){

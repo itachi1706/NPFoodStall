@@ -35,15 +35,15 @@ public class FoodInPoolside {
     private static ArrayList<FoodItem> example2(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
         items.add(new FoodItem(0, 7, "Chicken Chop w Rice", 4));
-        items.add(new FoodItem(0, 7, "Scrambled Egg", 1));
-        items.add(new FoodItem(0, 7, "Cheese Fries", 2));
-        items.add(new FoodItem(0, 7, "Grilled Chicken w Noodle", 4));
+        items.add(new FoodItem(1, 7, "Scrambled Egg", 1));
+        items.add(new FoodItem(2, 7, "Cheese Fries", 2));
+        items.add(new FoodItem(3, 7, "Grilled Chicken w Noodle", 4));
         return items;
     }
     private static ArrayList<FoodItem> example3(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
         items.add(new FoodItem(0, 8, "Iced Milo", 1));
-        items.add(new FoodItem(0, 8, "Barley", 1));
+        items.add(new FoodItem(1, 8, "Barley", 1));
         return items;
     }
 
