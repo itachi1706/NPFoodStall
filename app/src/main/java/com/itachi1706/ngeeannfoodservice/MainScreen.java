@@ -37,6 +37,7 @@ public class MainScreen extends ActionBarActivity {
     ListView unclaimedFood, mainMenu;
     String[] menuItems = {"Reserve your food", "View Cart", "View Reserved Item History"};
     static final int DB_VER = 3;
+    boolean sdkWarn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -272,7 +273,10 @@ public class MainScreen extends ActionBarActivity {
                             MainScreen.this.finish();
                         }
                     });
-            builder.show();
+            if (!sdkWarn) {
+                builder.show();
+                sdkWarn = true;
+            }
             return true;
         }
         return false;
