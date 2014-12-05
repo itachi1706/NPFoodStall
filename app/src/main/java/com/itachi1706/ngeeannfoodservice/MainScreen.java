@@ -257,7 +257,7 @@ public class MainScreen extends ActionBarActivity {
 
     private boolean sdkCheck(){
         if (DatabaseHandler.checkIfSDK()){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Error with SDK :(")
+            AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Detected SDK Emulator Note")
                     .setMessage("There will be an error if you use an SDK emulator to access this app if you do not have SD Card enabled.\n"
                             + "If it crashes after you click OK, please enable SD Card in your emulator settings, or switch to an actual Android Device")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
