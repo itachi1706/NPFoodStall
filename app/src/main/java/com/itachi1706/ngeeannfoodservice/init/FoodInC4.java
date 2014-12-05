@@ -13,39 +13,38 @@ public class FoodInC4 {
 
 	/*
 	 * Stalls in Canteen 4 [16-18] (And their code)
-	 * 16 - Wanton Noodles
-	 * 17 - Western Food (Hot Potatoes)
-	 * 18 - Drink Stall
+	 * 14 - Wanton Noodles
+	 * 15 - Hot Potato (Western)
+	 * 16 - Drink Stall
 	 */
 
     public static ArrayList<FoodStall> getFoodInC4(){
         ArrayList<FoodStall> stalls = new ArrayList<FoodStall>();
-        stalls.add(new FoodStall(16,"Wanton Noodles", "Canteen 4", wantonNoodlesStall()));
-        stalls.add(new FoodStall(17,"Western?", "Canteen 4", westernFoodStall()));
-        stalls.add(new FoodStall(18,"Drink Stall", "Canteen 4", drinkFoodStall()));
+        stalls.add(new FoodStall(14,"Wanton Noodles", "Canteen 4", wantonNoodlesStall()));
+        stalls.add(new FoodStall(15,"Hot Potato (Western)", "Canteen 4", westernFoodStall()));
+        stalls.add(new FoodStall(16,"Drink Stall", "Canteen 4", drinkFoodStall()));
         return stalls;
     }
 
     private static ArrayList<FoodItem> wantonNoodlesStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(1, 16, "Wanton Noodles", 3.5));
-        items.add(new FoodItem(2, 16, "Wanton Soup", 3));
+        items.add(new FoodItem(1, 14, "Wanton Noodles", 3.5));
+        items.add(new FoodItem(2, 14, "Wanton Soup", 3));
         return items;
     }
 
     private static ArrayList<FoodItem> westernFoodStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(1,17, "Fish & Chips", 4.5));
-        items.add(new FoodItem(2,17, "Chicken Chop", 4.5));
-        items.add(new FoodItem(3,17, "Spaghetti", 4.5));
+        items.add(new FoodItem(1,15, "Fish & Chips", 4.5));
+        items.add(new FoodItem(2,15, "Chicken Chop", 4.5));
+        items.add(new FoodItem(3,15, "Spaghetti", 4.5));
         return items;
     }
 
     private static ArrayList<FoodItem> drinkFoodStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(1,18, "Iced Milo", 1.5));
-        items.add(new FoodItem(2,18, "Iced Tea", 1));
-        items.add(new FoodItem(3,18, "Coffee O", 0.6));
+        items.add(new FoodItem(1,16, "Iced Milo", 1.5));
+        items.add(new FoodItem(2,16, "Iced Tea", 1));
         return items;
     }
 }

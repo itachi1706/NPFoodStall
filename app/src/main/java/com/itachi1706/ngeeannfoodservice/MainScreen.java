@@ -1,12 +1,10 @@
 package com.itachi1706.ngeeannfoodservice;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -17,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,14 +23,9 @@ import android.widget.Toast;
 import com.itachi1706.ngeeannfoodservice.cart.Cart;
 import com.itachi1706.ngeeannfoodservice.cart.CartItem;
 import com.itachi1706.ngeeannfoodservice.cart.MainMenuUnclaimedItems;
-import com.itachi1706.ngeeannfoodservice.init.FoodInC4;
-import com.itachi1706.ngeeannfoodservice.init.FoodInMakan;
-import com.itachi1706.ngeeannfoodservice.init.FoodInMunch;
-import com.itachi1706.ngeeannfoodservice.init.FoodInPoolside;
 import com.itachi1706.ngeeannfoodservice.init.InitializeDatabase;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,7 +36,7 @@ public class MainScreen extends ActionBarActivity {
     ProgressDialog pDialog;
     ListView unclaimedFood, mainMenu;
     String[] menuItems = {"Reserve your food", "View Cart", "View Reserved Item History"};
-    static final int DB_VER = 1;
+    static final int DB_VER = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +136,7 @@ public class MainScreen extends ActionBarActivity {
                 pDialog.dismiss();
             }
         }  catch (NullPointerException e){
-
+            e.printStackTrace();
         }
     }
 
@@ -280,7 +272,7 @@ public class MainScreen extends ActionBarActivity {
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
             if (sharedPref.getInt("dbValue", 0) != DB_VER) {
-                DatabaseHandler db = new DatabaseHandler(this.getApplicationContext());
+                new DatabaseHandler(this.getApplicationContext());
                 pDialog = new ProgressDialog(this);
                 pDialog.setCancelable(false);
                 pDialog.setIndeterminate(true);

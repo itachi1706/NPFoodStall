@@ -13,47 +13,47 @@ public class FoodInMakan {
 
 	/*
 	 * Stalls in Makan Place [11-15](And their code)
-	 * 11 - Drink Stall
-	 * 12 - Fruit Stall
-	 * 13 - Chicken Rice
-	 * 14 - Japanese
-	 * 15 - Italian Pasta?
+	 * 9 - A&J
+	 * 10 - Pines
+	 * 11 - Hotplate Stall
+	 * 12 - Ban Mian Stall
+	 * 13 - Japanese Cuisine
 	 *
 	 */
 
     public static ArrayList<FoodStall> getFoodInMakan(){
         ArrayList<FoodStall> stalls = new ArrayList<FoodStall>();
-        stalls.add(new FoodStall(11,"Wanton Noodles", "Makan Place", example()));
-        stalls.add(new FoodStall(12,"Wanton Noodles", "Makan Place", example2()));
-        stalls.add(new FoodStall(13,"Wanton Noodles", "Makan Place", example3()));
-        stalls.add(new FoodStall(14,"Wanton Noodles", "Makan Place", example4()));
-        stalls.add(new FoodStall(15,"Wanton Noodles", "Makan Place", example5()));
+        stalls.add(new FoodStall(9,"A&J", "Makan Place", westernStall()));
+        stalls.add(new FoodStall(10,"Pines", "Makan Place", pinesStall()));
+        stalls.add(new FoodStall(11,"Hotplate Stall", "Makan Place", hotplateStall()));
+        stalls.add(new FoodStall(12,"Ban Mian Stall", "Makan Place", banMianStall()));
+        stalls.add(new FoodStall(13,"Japanese Cuisine", "Makan Place", japStall()));
         return stalls;
     }
 
-    private static ArrayList<FoodItem> example(){
+    private static ArrayList<FoodItem> westernStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 11, "Rice", 0.5));
+        items.add(new FoodItem(0, 9, "Cheese Baked Rice", 4));
         return items;
     }
-    private static ArrayList<FoodItem> example2(){
+    private static ArrayList<FoodItem> pinesStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 12, "Rice", 0.5));
+        items.add(new FoodItem(0, 10, "Nasi Goreng Kampung", 3.5));
         return items;
     }
-    private static ArrayList<FoodItem> example3(){
+    private static ArrayList<FoodItem> hotplateStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 13, "Rice", 0.5));
+        items.add(new FoodItem(0, 11, "Fried Chicken with Spicy Tofu", 3.5));
         return items;
     }
-    private static ArrayList<FoodItem> example4(){
+    private static ArrayList<FoodItem> banMianStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 14, "Rice", 0.5));
+        items.add(new FoodItem(0, 12, "Ban Mian", 2.8));
         return items;
     }
-    private static ArrayList<FoodItem> example5(){
+    private static ArrayList<FoodItem> japStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 15, "Rice", 0.5));
+        items.add(new FoodItem(0, 13, "Kaki Fuyong", 3));
         return items;
     }
 }

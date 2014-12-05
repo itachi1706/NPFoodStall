@@ -13,47 +13,50 @@ public class FoodInMunch {
 
 	/*
 	 * Stalls in Munch [1-5] (And their code)
-	 * 1 - Nasi Lemak
+	 * 1 - Nasi Ayam Panggang
 	 * 2 - Western
-	 * 3 - Vegetarian
+	 * 3 - Pepper Lunch
 	 * 4 - Drink Stall
-	 * 5 - Soya Bean Stall
+	 * 5 - Wanton Noodles
 	 *
 	 */
 
     public static ArrayList<FoodStall> getFoodInMunch(){
         ArrayList<FoodStall> stalls = new ArrayList<FoodStall>();
-        stalls.add(new FoodStall(1,"Wanton Noodles", "Munch", nasiLemakStall()));
-        stalls.add(new FoodStall(2,"Wanton Noodles", "Munch", nasiLemakStall2()));
-        stalls.add(new FoodStall(3,"Wanton Noodles", "Munch", nasiLemakStall3()));
-        stalls.add(new FoodStall(4,"Wanton Noodles", "Munch", nasiLemakStall4()));
-        stalls.add(new FoodStall(5,"Wanton Noodles", "Munch", nasiLemakStall5()));
+        stalls.add(new FoodStall(1,"Nasi Ayam Panggang", "Munch", pangangStall()));
+        stalls.add(new FoodStall(2,"Western", "Munch", westernStall()));
+        stalls.add(new FoodStall(3,"Pepper Lunch", "Munch", deprecratedPepperLunchStall()));
+        stalls.add(new FoodStall(4,"Drink Stall", "Munch", drinkStall()));
+        stalls.add(new FoodStall(5,"Wanton Noodles", "Munch", wantonStall()));
         return stalls;
     }
 
-    private static ArrayList<FoodItem> nasiLemakStall(){
+    private static ArrayList<FoodItem> pangangStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 1, "Rice", 0.5));
+        items.add(new FoodItem(0, 1, "Nasi Ayam Panggang", 2.8));
+        items.add(new FoodItem(0, 1, "Roasted Panggang", 3.5));
         return items;
     }
-    private static ArrayList<FoodItem> nasiLemakStall2(){
+    private static ArrayList<FoodItem> westernStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 2, "Rice", 0.5));
+        items.add(new FoodItem(0, 2, "Chicken Chop", 3.5));
         return items;
     }
-    private static ArrayList<FoodItem> nasiLemakStall3(){
+    private static ArrayList<FoodItem> deprecratedPepperLunchStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 3, "Rice", 0.5));
+        items.add(new FoodItem(0, 3, "Curry Sizzling Rice", 4.5));
         return items;
     }
-    private static ArrayList<FoodItem> nasiLemakStall4(){
+    private static ArrayList<FoodItem> drinkStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 4, "Rice", 0.5));
+        items.add(new FoodItem(0, 4, "Iced Milo", 1.5));
+        items.add(new FoodItem(0, 4, "Iced Tea", 1));
+        items.add(new FoodItem(0, 4, "Coffee O", 0.6));
         return items;
     }
-    private static ArrayList<FoodItem> nasiLemakStall5(){
+    private static ArrayList<FoodItem> wantonStall(){
         ArrayList<FoodItem> items = new ArrayList<FoodItem>();
-        items.add(new FoodItem(0, 5, "Rice", 0.5));
+        items.add(new FoodItem(0, 5, "Fishball Soup", 3));
         return items;
     }
 }
