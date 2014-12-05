@@ -36,7 +36,7 @@ public class MainScreen extends ActionBarActivity {
     ProgressDialog pDialog;
     ListView unclaimedFood, mainMenu;
     String[] menuItems = {"Reserve your food", "View Cart", "View Reserved Item History"};
-    static final int DB_VER = 2;
+    static final int DB_VER = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
