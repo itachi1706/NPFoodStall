@@ -255,36 +255,53 @@ public class MainScreen extends ActionBarActivity {
         }
     }
 
-    public void initDatabase(){
-        //Toast.makeText(getApplicationContext(), Build.PRODUCT.toString(), Toast.LENGTH_SHORT).show();
-        /*if (DatabaseHandler.checkIfSDK()){
+    private boolean sdkCheck(){
+        if (DatabaseHandler.checkIfSDK()){
             AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Error with SDK :(")
-                    .setMessage("There will be an error if you use an SDK to access emulator this app\n"
-                                    + "Please use an actual Android device to test this application.")
+                    .setMessage("There will be an error if you use an SDK emulator to access this app if you do not have SD Card enabled.\n"
+                            + "If it crashes after you click OK, please enable SD Card in your emulator settings, or switch to an actual Android Device")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //MainScreen.this.finish();
+                            startInit();
+                        }
+                    }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MainScreen.this.finish();
                         }
                     });
             builder.show();
-        }*/ //else {
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            return true;
+        }
+        return false;
+    }
 
-            if (sharedPref.getInt("dbValue", 0) != DB_VER) {
-                new DatabaseHandler(this.getApplicationContext());
-                pDialog = new ProgressDialog(this);
-                pDialog.setCancelable(false);
-                pDialog.setIndeterminate(true);
-                pDialog.setTitle("Refreshing Database...");
-                pDialog.setMessage("Updating Database of food stalls...");
-                pDialog.show();
+    public void initDatabase(){
+        //Toast.makeText(getApplicationContext(), Build.PRODUCT.toString(), Toast.LENGTH_SHORT).show();
+         //else {
+        if (!sdkCheck()) {
+            startInit();
+            //}
+        }
 
-                new InitializeDatabase(pDialog, this).execute();
-                sharedPref.edit().putInt("dbValue", DB_VER).apply();
-            }
-        //}
+    }
 
+    private void startInit(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if (sharedPref.getInt("dbValue", 0) != DB_VER) {
+            new DatabaseHandler(this.getApplicationContext());
+            pDialog = new ProgressDialog(this);
+            pDialog.setCancelable(false);
+            pDialog.setIndeterminate(true);
+            pDialog.setTitle("Refreshing Database...");
+            pDialog.setMessage("Updating Database of food stalls...");
+            pDialog.show();
+
+            new InitializeDatabase(pDialog, this).execute();
+            sharedPref.edit().putInt("dbValue", DB_VER).apply();
+        }
     }
 
     @Override
