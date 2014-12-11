@@ -58,7 +58,6 @@ public class CartActivity extends ActionBarActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     final CartItem item = (CartItem) itemsList.getItemAtPosition(position);
-                    String itemName = item.get_name();
                     new AlertDialog.Builder(CartActivity.this).setTitle("Item Details")
                             .setMessage(String.format("Location: " + item.get_location() + "\nQuantity: " + item.get_qty() + "\nPrice: $%.2f", item.get_price()))
                             .setPositiveButton("Close",null).setNeutralButton("Change Quantity", new DialogInterface.OnClickListener() {
@@ -74,10 +73,9 @@ public class CartActivity extends ActionBarActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
-                                    CartItem newItem = item;
-                                    newItem.set_qty(Integer.parseInt(input.getText().toString()));
+                                    item.set_qty(Integer.parseInt(input.getText().toString()));
                                     Toast.makeText(getApplicationContext(), "Quantity Changed", Toast.LENGTH_SHORT).show();
-                                    db.modifyCartItemQty(newItem);
+                                    db.modifyCartItemQty(item);
                                     adapter.notifyDataSetChanged();
                                     itemsList.setAdapter(adapter);
                                     calculateSubtotal();
