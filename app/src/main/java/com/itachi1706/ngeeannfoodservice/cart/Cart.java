@@ -15,8 +15,6 @@ import java.util.Locale;
  */
 public class Cart {
 
-
-
     private int _cartId;
     private String _datetime;
     private boolean _confirmed;

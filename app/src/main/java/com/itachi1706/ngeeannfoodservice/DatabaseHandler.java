@@ -2,10 +2,13 @@ package com.itachi1706.ngeeannfoodservice;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,12 +44,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     + File.separator + DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static boolean checkIfSDK(){
-        if (Build.PRODUCT.startsWith("sdk")){
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean checkIfSDK(Context context){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPref.getBoolean("emuwarn", true) && Build.PRODUCT.startsWith("sdk");
     }
 
     //Create the 2 tables

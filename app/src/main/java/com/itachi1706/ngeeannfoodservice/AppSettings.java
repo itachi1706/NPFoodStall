@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -136,6 +137,11 @@ public class AppSettings extends ActionBarActivity {
                     return true;
                 }
             });
+
+            Preference sdkEmu = findPreference("emuwarn");
+            if (!Build.PRODUCT.startsWith("sdk")){
+                sdkEmu.setEnabled(false);
+            }
 
             Preference bug = findPreference("vBug");
             bug.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {

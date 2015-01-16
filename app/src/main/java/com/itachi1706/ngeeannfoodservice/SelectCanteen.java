@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -47,7 +48,7 @@ public class SelectCanteen extends ActionBarActivity {
                     intent.putExtra("location", canteenSelected);
                     startActivity(intent);
                 } else {
-                    new AlertDialog.Builder(SelectCanteen.this).setTitle("Unsupported Eatery")
+                    AlertDialog.Builder alert = new AlertDialog.Builder(SelectCanteen.this).setTitle("Unsupported Eatery")
                             .setMessage("Unfortunately, this eatery has yet to support this application. However, you can click the show on map button to show " +
                             "the nearest location of the eatery from the school.").setPositiveButton("Show on Maps", new DialogInterface.OnClickListener() {
                         @Override
@@ -56,7 +57,42 @@ public class SelectCanteen extends ActionBarActivity {
                             intent.putExtra("location", canteenSelected);
                             startActivity(intent);
                         }
-                    }).setNegativeButton(android.R.string.cancel, null).show();
+                    }).setNegativeButton(android.R.string.cancel, null);
+
+                    //Check if its like. KFC or sth
+                    switch (canteenSelected) {
+                        case "McDonalds":
+                            alert.setNeutralButton("Order Online", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Uri uri = Uri.parse("https://www.mcdelivery.com.sg/sg/jsp-desktop/index.jsp");
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                    startActivity(intent);
+                                }
+                            });
+                            break;
+                        case "KFC":
+                            alert.setNeutralButton("Order Online", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Uri uri = Uri.parse("https://www.kfcdelivery.com.sg/");
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                    startActivity(intent);
+                                }
+                            });
+                            break;
+                        case "Pizza Hut":
+                            alert.setNeutralButton("Order Online", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Uri uri = Uri.parse("http://www.pizzahut.com.sg/delivery/");
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                    startActivity(intent);
+                                }
+                            });
+                            break;
+                    }
+                    alert.show();
                 }
             }
         });

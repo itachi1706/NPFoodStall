@@ -54,15 +54,19 @@ public class MainScreen extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selected = (String) mainMenu.getItemAtPosition(position);
                 Intent intent = null;
-                if (selected.equals("Reserve your food")) {
-                    intent = new Intent(MainScreen.this, SelectCanteen.class);
+                switch (selected) {
+                    case "Reserve your food":
+                        intent = new Intent(MainScreen.this, SelectCanteen.class);
 
-                } else if (selected.equals("View Cart")) {
-                    intent = new Intent(MainScreen.this, CartActivity.class);
+                        break;
+                    case "View Cart":
+                        intent = new Intent(MainScreen.this, CartActivity.class);
 
-                } else if (selected.equals("View Reserved Item History")) {
-                    intent = new Intent(MainScreen.this, ReservedItems.class);
+                        break;
+                    case "View Reserved Item History":
+                        intent = new Intent(MainScreen.this, ReservedItems.class);
 
+                        break;
                 }
                 startActivity(intent);
 
@@ -257,7 +261,7 @@ public class MainScreen extends ActionBarActivity {
     }
 
     private boolean sdkCheck(){
-        if (DatabaseHandler.checkIfSDK()){
+        if (DatabaseHandler.checkIfSDK(getApplicationContext())){
             AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Detected SDK Emulator Note")
                     .setMessage("There might be an error if you use an SDK emulator to access this app if you do not have SD Card enabled.\n"
                             + "If it crashes after you click OK, please enable SD Card in your emulator settings, or switch to an actual Android Device")

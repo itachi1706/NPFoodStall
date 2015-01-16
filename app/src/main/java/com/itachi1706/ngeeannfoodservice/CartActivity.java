@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,10 @@ public class CartActivity extends ActionBarActivity {
         date = (TextView) findViewById(R.id.tvDate);
         itemsList = (ListView) findViewById(R.id.lvItems);
         subTotal = (TextView) findViewById(R.id.tvSubtotal);
+
+        ImageView vol = new ImageView(getApplicationContext());
+        //vol.setImageDrawable(R.drawable.ic_launcher);
+
 
         ShoppingCartDBHandler db = new ShoppingCartDBHandler(getApplicationContext());
         Cart cart;
